@@ -10,6 +10,7 @@
 \usepackage{sectsty} % Allows customizing section commands
 \allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
 \usepackage{MnSymbol}
+\usepackage{paralist}
 \usepackage{float}
 \usepackage{fancyhdr} % Custom headers and footers
 \pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
@@ -29,7 +30,8 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 \lstset{
-	mathescape
+	mathescape,
+	escapeinside={(*@}{@*)}
 }
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -54,9 +56,9 @@
 
 \title{	
 \normalfont \normalsize 
-\textsc{Ca' Foscari, Cyber Security, DAIS} \\ [25pt] % Your university, school and/or department name(s)
+\textsc{Ca' Foscari University of Venice, MSc Computer Science, Cybersecurity} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge Advanced Algorithms part 2 \\ % The assignment title
+\huge Advanced Algorithms and Programming Methods: Distributed Algorithms \\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -64,54 +66,86 @@
 
 \maketitle % Print the title
 
-\section*{Broadcast}
-\textbf{Definition:} Consider a distributed computing system where only one entity x, knows some important information; this entity would like to share this information with all the other entitites in the system. This problem is called broadcasting.\\
-To solve this problem meand to design a set of rules that, when executed by the entities, will lead to a configuration where all entitieswill know the information; the solution must work without regardless of which entity has the information at the beginning.\\
-Hence, for its solution, broadcasting requires connecctivity restriction (every entity has to be reachable from every other entity). \\
-\textbf{Cost:} We will denote by M(Bcast) and T(Bcast) the message and time complexity. \\
-The first message is sent by the initiator and has to reach all the entities.\\
-Given d(a,b) the distance, i.e., the minimal number of edges between a and b, the ideal time depends on the time spent to go from the initiator to any node, thus the eccentrity or radius of G.
+\section*{Broadcast: the FLOODING algorithm}
+\textbf{Definition} \\
+Consider a distributed computing system where only one entity $x$ knows some important information; this entity would like to share this knowledge with all the other entities in the system. This problem is called \textit{broadcasting}.
+
+Solving this problem means designing a set of rules that, when executed by the entities, will lead to a configuration in which all entities know the information; the solution must work regardless of which entity has the information at the beginning.
+
+According to this, broadcasting requires connectivity restrictions to be solved: in particular, every entity has to be reachable from every other entity. \\ \\
+
+\textbf{Time and Message complexity} \\
+We will denote by $M(Bcast)$ and $T(Bcast)$ the message and time complexity.
+
+The first message is sent by the initiator and has to reach all the entities.
+
+Given $d(a, b)$ the distance, i.e., the minimal number of edges between $a$ and $b$, the ideal time depends on the time spent to go from the initiator to any node, thus the \textit{eccentricity} or radius of G.
 $$r(initiator) = Max\{d(x,y) : x,y \in V\}$$
-Given that any node can be the initiator we have to compute the diameter of the graph
-$$T(Bcast) = diameter(G) \leq n-1 = O(n)$$
-We consider m as the number of links. We could say that there will be $\leq$ 2 messages on each link. Let s be our initiator: 
-\newpage
-$$M(Bcast) = |N(s)| + \sum_{x \neq s} (|N(x)|-1)$$
-$$= \sum_{x}|N(x)| - \sum_{x \neq s}1$$
-$$= 2m - (n-1)$$ 
-\textbf{Code:} We have to consider three different states, INITIATOR, SLEEPING, DONE and two possible event, spuntaneous impulse event and receving the message.
+~ \\
+Given that any node can be the initiator, we need to compute the diameter of the graph:
+$$T(Bcast) = diameter(G) \leq n-1 = \mathcal{O}(n)$$
+We consider $m$ as the number of links. We could say that there will be $\leq$ 2 messages on each link.
+
+Let $s$ be our initiator: 
+\begin{align*}
+	M(Bcast) &= |N(s)| + \sum_{x \neq s} (|N(x)|-1) 
+			 = \sum_{x}|N(x)| - \sum_{x \neq s}1 
+	         = 2m - (n-1)
+\end{align*}
+
+The \textit{flooding} algorithm has optimal time complexity, but the number of messages sent can be reduced! In fact, $M(BCast) \ge m = \Omega(m)$ and $M(Flooding) = 2m - n + 1$. 
+
+~ \\
+
+\textbf{Assumptions}\\ 
+Before proceeding with the actual code, we need to make some assumptions about the solution we are providing. In particular:
+\begin{compactitem}
+	\item Unique initiator: the initiator is unique by definition of the problem
+	\item Total reliability \& bidirectional link: to simplify the solution
+	\item G is connected: otherwise the problem would be unsolvable for a given initiator K
+\end{compactitem}
+~\\
+\textbf{Code} 
+\\ We have to consider three different states -INITIATOR, SLEEPING, DONE- and two possible events -spontaneous impulse event and receiving of a message.
+
 \begin{lstlisting}
 if INITIATOR
-	spontaneous impulse event
+	(*@\textit{spontaneous impulse event}@*)
 		send(I) to N(X)
 		become (DONE)
-	receving(I)
+	(*@\textit{receiving(I)}@*)
 		do-nothing
 if SLEEPING
-	receving(I)
+	(*@\textit{receiving(I)}@*)
 		send(I) to N(x) - {sender}
 		become(DONE)
-	spontaneous impulse event
+	(*@\textit{spontaneous impulse event}@*)
 		do-nothing
 if DONE
-	receving(I)
+	(*@\textit{receiving(I)}@*)
 		do-nothing
-	spontaneous impulse event
+	(*@\textit{spontaneous impulse event}@*)
 		do-nothing				
 \end{lstlisting}
 
+Notice that if the system is asynchronous, many different executions are possible, depending on the speed at which messages travel.
 
-\subsection*{Spanning tree}
-A spanning tree T of a graph G = (V, E) is an acyclic subgraph of G such that T' = (V, E') and E' $\subset$ E.
+It is also worth noting that in a distributed environment the entities end their computations at different points in time, hence there is only a concept of \textit{local termination} instead of a \textit{global} one. No entity knows when the entire process terminates!
+
+
 \section*{Protocol SHOUT}
-Assumption: There is a single initiator, there are bidirectional links, total reliability and G is connected. \\
-\textbf{Definition:} We want to build a spanning tree in a distributed system, but we have to consider that the entities do not know G, not even its size. The only things an entity is aware of are the labels on the ports leading to its neighbors and the fact that, if it sends a message to a neighbor, the message will eventually be received.\\
-\textbf{Solution:} \textit{Ask-Your-Neighbors}
-\begin{itemize}
-\item The initiator s will ask its neighbors; it will send a message Q = ('Are you my neighbor in the spanning tree?') to all its neighbors.
-\item An entity x $\neq$ s will reply 'Yes' only the first time it is asked and, in this occasion, it wull ask all its other neighbors; otherwise it will reply 'No'.
+We are assuming that there is a single initiator, there are bidirectional links, there is total reliability and G is connected. \\ \\
+\textbf{Preliminary: definition of Spanning Tree} \\ 
+A spanning tree T of a graph G = (V, E) is an acyclic subgraph of G such that T' = (V, E') and\\ E' $\subseteq$ E.
+\\ ~ \\
+\textbf{Definition} \\
+We want to build a spanning tree in a distributed system, but we have to consider that the entities do not know G, not even its size. The only things an entity is aware of are the labels on the ports leading to its neighbors and the fact that, if it sends a message to a neighbor, the message will eventually be received.\\~\\
+\textbf{Solution} ~ ~ \textit{Ask-Your-Neighbors}
+\begin{compactitem}
+\item The initiator $s$ will send a message Q = ('Are you my neighbor in the spanning tree?') to all its neighbors
+\item An entity $x \neq s$ will reply 'Yes' only the first time it is asked and, in this occasion, it will ask all its other neighbors; otherwise it will reply 'No'.
 \item Each entity terminates when it has received a reply from all neighbors to which it asked the question.
-\end{itemize}
+\end{compactitem}
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{img/shout.png}
@@ -122,14 +156,14 @@ Assumption: There is a single initiator, there are bidirectional links, total re
 \textbf{Code:} We have four states, INITIATOR, IDLE, ACTIVE, DONE; the terminal state is DONE.
 \begin{lstlisting}
 if INITIATOR
-	spontaneous event
+	(*@\textit{spontaneous impulse event}@*)
 		root = true
 		tree-neighbours = {}
 		send(Q) to N(x)
 		counter = 0
 		become ACTIVE
 if IDLE
-	receving(Q)
+	(*@\textit{receiving(Q)}@*)
 		root = false
 		parent = sender
 		tree-neighbours = {sender}
@@ -137,40 +171,67 @@ if IDLE
 		counter = 1
 		//managing leaves and intermediate node cases
 		if counter = |N(x)| then
-			become(DONE)
+			become DONE
 		else
 			send (Q) to N(x) - {sender}
 			become ACTIVE			 
 if ACTIVE
-	receving(Q)
+	(*@\textit{receiving(Q)}@*)
 		send ('No') to sender
-	receving('Yes')
+	(*@\textit{receiving('Yes')}@*)
 		tree-neighbours = tree-neighbours $\cup$ sender
 		counter += 1
 		if counter = |N(x)|
-			become(DONE)
-	receving('No')
+			become DONE
+	(*@\textit{receiving('No')}@*)
 		counter += 1
 		if counter = |N(x)|
-			become(DONE)			
+			become DONE			
 \end{lstlisting}
-\textbf{Complexity:} To compute the total amount of messages sent in this protocol we have to consider the messages sent by the initiator or the other sent to the neioghbours, the amount of 'Yes' and 'No' answer.
-$$ M(SHOUT) = Q + NO  + YES $$
-$$=(n-1)+ 2(m-(n-1)) + 2(m-(n-1)) + (n-1)$$
-$$= 4m - 2n + 2 = 2(2m-n+1)$$
-We could improve this solution but how? Do we really need the 'No' message?
+\textbf{Complexity} \\
+First of all, notice that \textit{shout} can be assimilated to a combination of \textit{flood} and \textit{reply}. In other words, $M(SHOUT) = 2	\times M(FLOOD)$.
+To compute the total amount of messages sent in this protocol we have to consider the messages sent by the initiator, plus the other messages Q sent, plus the amount of 'Yes' and 'No' answers.
+\begin{align*}
+	M(SHOUT) &= Q + NO  + YES \\ 
+	&= (n-1)+ 2\times(m-(n-1)) + 2\times(m-(n-1)) + (n-1) \\
+	&= 4m - 2n + 2 = 2\times(2m-n+1)
+\end{align*}
+
 \subsection*{SHOUT+}
-The code is almost the same, but we do not need to send the 'No' message. But how can we manage that?\\
-What we have to change is the following:
+We might wonder that SHOUT could be improved. For example, we might avoid sending all the 'No' messages.
+\\ This is the idea behind the SHOUT+ algorithm. In fact, the code is almost the same as SHOUT, but we do not need to send the 'No' message. Of course, this change needs to be managed.\\
+In order to do this, we only need to change the ACTIVE state.
 \begin{lstlisting}
 if ACTIVE
-	receving(Q)
+	(*@\textit{receiving(Q)}@*)
+		send ('No') to sender
+	(*@\textit{receiving('Yes')}@*)
+		tree-neighbours = tree-neighbours $\cup$ sender
+		counter += 1
+		if counter = |N(x)|
+			become DONE
+	(*@\textit{receiving('No')}@*)
+		counter += 1
+		if counter = |N(x)|
+			become DONE	
+\end{lstlisting}
+is replaced by 
+\begin{lstlisting}
+if ACTIVE
+	(*@\textit{receiving(Q)}@*)
 		counter += 1
 		if counter = |N(x)|
 			become(DONE)
+	(*@\textit{receiving('Yes')}@*)
+		tree-neighbours = tree-neighbours $\cup$ sender
+		counter += 1
+		if counter = |N(x)|
+			become DONE
 \end{lstlisting}
 \textbf{Complexity:} The messages are much less. 
-$$M(SHOUT+) = 2m$$ when $$M(SHOUT) = 2(2m -n+1)$$
+$$M(SHOUT+) = 2m$$ while $$M(SHOUT) = 2(2m -n+1)$$
+
+\clearpage
 \section*{Leader election}
 \textbf{Definition:} Moving the system from an initial configuration where all entities are in the same state (called avaiable), into a final configuration where all entities are in the same state (called follower), except one which is in a different state (called leader).\\
 No restriction, we assume a bidirectional graph, connected and no failures.\\
@@ -194,7 +255,7 @@ if AVAILABLE (I haven't been activated yet)
 			become(PROCESSING)
 		else
 			become(ACTIVE)	
-		receving('Activate')
+		receiving('Activate')
 			send('Activate') to N(x) - {sender}
 			neighbours = N(x)
 			if |neighbours| = 1
@@ -204,14 +265,14 @@ if AVAILABLE (I haven't been activated yet)
 			else
 				become(ACTIVE)
 if ACTIVE
-	receving(M)
+	receiving(M)
 	neighbours = neighbours - {sender}
 	if |neighbours| = 1
 			parent = neighbours
 			send('Saturation') to parent
 			become(PROCESSING)
 if PROCESSING
-	receving(M)
+	receiving(M)
 		become(SATURATED)					
 \end{lstlisting}
 \textbf{Complexity:} $$M(Saturation) = 2n -2+n+n-2 = 4(n-1)$$ 
@@ -242,7 +303,7 @@ if AVAILABLE
 			become(PROCESSING)
 		else
 			become(ACTIVE)
-	receving('Activate')
+	receiving('Activate')
 		send('Activate') to N(x) - {sender}
 		min = v(x)
 		neighbours = N(x)
@@ -254,7 +315,7 @@ if AVAILABLE
 		else
 			become(ACTIVE)
 if ACTIVE
-	receving(M)
+	receiving(M)
 		min = min{min, M}
 		neighbours = neighbours - {sender}
 		if |neighbours| = 1 //leaf
@@ -266,7 +327,7 @@ if ACTIVE
 \newpage
 \begin{lstlisting}			
 if PROCESSING
-	receving(M)
+	receiving(M)
 		min = MIN{min, M}
 		notification = ('Resolution', min)
 		send (Notification) to N(X) - parent
@@ -343,14 +404,14 @@ if ASLEEP
 	Spontaneously
 		INITIALIZE
 		become(AWAKE)
-	receving('Election', value, counter)
+	receiving('Election', value, counter)
 		INITIALIZE
 		send('Election', value, counter+1) to other
 		min = min {min, value}
 		count = count + 1
 		become(AWAKE)
 if AWAKE
-	receving('Election', value, counter)
+	receiving('Election', value, counter)
 		if value $\neq$ id(x)
 			send('Election', velue, counter+1) to other
 			min = min{min, value}
@@ -398,7 +459,7 @@ if ASLEEP
 		send('Election', id(x)) to right
 		min = id(x)
 		become(AWAKE)
-	receving('Election', value)
+	receiving('Election', value)
 		send('Election', id(x)) to right
 		min = id(x)
 		if value < min
@@ -406,14 +467,14 @@ if ASLEEP
 			min = value
 		become(AWAKE)		
 if AWAKE
-	receving('Election', value)
+	receiving('Election', value)
 		if value < min
 			send('Election', value) to right
 			min = value
 		else
 			if value = min
 				NOTIFY
-	receving(NOTIFY)
+	receiving(NOTIFY)
 		send(NOTIFY) to other
 		become(FOLLOWER)
 NOTIFY
