@@ -158,7 +158,7 @@ We want to build a spanning tree in a distributed system, but we have to conside
 if INITIATOR
 	(*@\textit{spontaneous impulse event}@*)
 		root = true
-		tree-neighbours = {}
+		tree-neighbors = {}
 		send(Q) to N(x)
 		counter = 0
 		become ACTIVE
@@ -166,7 +166,7 @@ if IDLE
 	(*@\textit{receiving(Q)}@*)
 		root = false
 		parent = sender
-		tree-neighbours = {sender}
+		tree-neighbors = {sender}
 		send('Yes') to sender
 		counter = 1
 		//managing leaves and intermediate node cases
@@ -179,7 +179,7 @@ if ACTIVE
 	(*@\textit{receiving(Q)}@*)
 		send ('No') to sender
 	(*@\textit{receiving('Yes')}@*)
-		tree-neighbours = tree-neighbours $\cup$ sender
+		tree-neighbors = tree-neighbors $\cup$ sender
 		counter += 1
 		if counter = |N(x)|
 			become DONE
@@ -206,7 +206,7 @@ if ACTIVE
 	(*@\textit{receiving(Q)}@*)
 		send ('No') to sender
 	(*@\textit{receiving('Yes')}@*)
-		tree-neighbours = tree-neighbours $\cup$ sender
+		tree-neighbors = tree-neighbors $\cup$ sender
 		counter += 1
 		if counter = |N(x)|
 			become DONE
@@ -223,111 +223,127 @@ if ACTIVE
 		if counter = |N(x)|
 			become(DONE)
 	(*@\textit{receiving('Yes')}@*)
-		tree-neighbours = tree-neighbours $\cup$ sender
+		tree-neighbors = tree-neighbors $\cup$ sender
 		counter += 1
 		if counter = |N(x)|
 			become DONE
 \end{lstlisting}
-\textbf{Complexity:} The messages are much less. 
-$$M(SHOUT+) = 2m$$ while $$M(SHOUT) = 2(2m -n+1)$$
+\textbf{Complexity} \\
+The messages are much less. 
+$M(SHOUT+) = 2m$ while $M(SHOUT) = 2(2m -n+1)$
 
 \clearpage
 \section*{Leader election}
-\textbf{Definition:} Moving the system from an initial configuration where all entities are in the same state (called avaiable), into a final configuration where all entities are in the same state (called follower), except one which is in a different state (called leader).\\
-No restriction, we assume a bidirectional graph, connected and no failures.\\
+\textbf{Definition} \\
+Moving the system from an initial configuration where all entities are in the same state (called \textit{available}), into a final configuration where all entities are in the same state (called \textit{follower}), except one which is in a different state (called \textit{leader}).\\
+We assume a bidirectional graph, connected and no failures.\\
+
 \subsection*{Saturation technique}
-This technique is used to solve many other problems, independently from the number and positions of the initiators (multiple initiators).\\
-The states are avaiable, awake and processing. the algorithm can be divided in three parts:
-\begin{itemize}
-\item Activation phase: started by all iterators, wake-up, all nodes are activated
-\item Saturation phase: started by the leaves, a unique pair of neighbours is identified(saturated node), the other become processing.
-\item Resolution phase: started by the saturated nodes
-\end{itemize}
-\textbf{Code:} We have four states AVAILABLE, ACTIVE, PROCESSING, SATURATED. The initial state is AVAILABLE.
+This technique is used to solve many other problems, independently from the number and positions of the initiators (there might be multiple initiators).\\
+The states are \textit{available}, \textit{awake} and \textit{processing}. The algorithm can be divided in three parts:
+\begin{compactitem}
+\item Activation phase: started by all initiators, consists in a ``wake-up" -  all nodes are \textit{activated}
+\item Saturation phase: started by the leaves, a unique pair of neighbors is identified (\textit{saturated nodes}), the other become \textit{processing}.
+\item Resolution phase: started by the saturated nodes, it varies depending on the protocol
+\end{compactitem}~\\
+\textbf{Code} \\ We have four states AVAILABLE, ACTIVE, PROCESSING, SATURATED. The initial state is AVAILABLE.
 \begin{lstlisting}
-if AVAILABLE (I haven't been activated yet)
-	spontaneously
+if AVAILABLE (*@ ~ ~ \textit{I haven't been activated yet}@*)
+	(*@\textit{spontaneously}@*)
 		send('Activate') to N(x)
-		neighbours = N(x)
-		if |neighbours| = 1 //leaf case
-			parent = neighbours
+		neighbors = N(x)
+		if |neighbors| = 1 (*@ ~ ~ \textit{leaf case}@*)
+			parent = neighbors
 			send('Saturation') to parent
 			become(PROCESSING)
 		else
 			become(ACTIVE)	
-		receiving('Activate')
-			send('Activate') to N(x) - {sender}
-			neighbours = N(x)
-			if |neighbours| = 1
-				parent = neighbours
-				send('Saturation') to parent
-				become(PROCESSING)
-			else
-				become(ACTIVE)
-if ACTIVE
-	receiving(M)
-	neighbours = neighbours - {sender}
-	if |neighbours| = 1
-			parent = neighbours
+	(*@\textit{receiving('Activate')}@*)
+		send('Activate') to N(x) - {sender}
+		neighbors = N(x)
+		if |neighbors| = 1
+			parent = neighbors
 			send('Saturation') to parent
 			become(PROCESSING)
+		else
+			become(ACTIVE)
+
+
+if ACTIVE
+	(*@\textit{receiving(M)}@*)
+	neighbors = neighbors - {sender}
+	if |neighbors| = 1
+		parent = neighbors
+		send('Saturation') to parent
+		become(PROCESSING)
+
 if PROCESSING
-	receiving(M)
+	(*@\textit{receiving(M)}@*)
 		become(SATURATED)					
 \end{lstlisting}
-\textbf{Complexity:} $$M(Saturation) = 2n -2+n+n-2 = 4(n-1)$$ 
-But how this technique can be useful for our election problem?
+
+
+\textbf{Complexity} 
+$$M(Saturation) = 2n -2+n+n-2 = 4(n-1)$$ 
+But how can this technique be useful for our election problem?
+~ \\
+
 \subsection*{Solution to the election problem}
-Let us assume we assign a label v(x) to each node, then it's possible to:
-\begin{itemize}
-\item Run the saturation technique.
+Let us assume we assign a label $v(x)$ to each node. Then, it is possible to:
+\begin{compactenum}
+\item Run the saturation technique
 \item The two saturated nodes exchange the value and if it is different they can elect as a leader the one with smaller value.\\
 Observations:
-\item If nodes do not have distinct labels the leader cannot be elected.
-\item Each saturated node knows where the other one is, since it knows from which edge it has received the last message.
-\end{itemize}
+\begin{compactitem}
+	\item If nodes do not have distinct labels, the leader cannot be elected.
+	\item Each saturated node knows where the other one is, since it knows from which edge it has received the last message.
+\end{compactitem}
+\end{compactenum}
+
+\clearpage 
 \subsection*{Minimum finding with saturation technique}
-Each entity x has in input its value (value(x)). At the end each entity should know whether it is the minimum or not.\\
-The states are AVAILABLE, ACTIVE, PROCESSING, MINIMUM, LARGE. The starting state is AVAILABLE.\\
-\textbf{Code:}The states are AVAILABLE, ACTIVE, PROCESSING, MINIMUM, LARGE. The starting state is AVAILABLE.
+Each entity $x$ has in input its value $value(x)$. At the end each entity should know whether it is the minimum or not.\\
+
+\textbf{Code} \\
+The states are AVAILABLE, ACTIVE, PROCESSING, MINIMUM, LARGE. The starting state is AVAILABLE.
 \begin{lstlisting}
 if AVAILABLE
-	spontaneously
+	(*@\textit{spontaneously}@*)
 		send('Activate') to N(x)
 		min = v(x)
-		neighbours = N(x)
+		neighbors = N(x)
 		if |neigbours| = 1 //leaf
 			M = ('Saturation', min)
-			parent = neighbours
+			parent = neighbors
 			send(M) to parent
 			become(PROCESSING)
 		else
 			become(ACTIVE)
-	receiving('Activate')
+	(*@\textit{receiving('Activate')}@*)
 		send('Activate') to N(x) - {sender}
 		min = v(x)
-		neighbours = N(x)
-		if |neighbours| = 1	//leaf
+		neighbors = N(x)
+		if |neighbors| = 1	//leaf
 			M = ('Saturation', min)
-			parent = neighbours
+			parent = neighbors
 			send(M) to parent
 			become(PROCESSING)
 		else
 			become(ACTIVE)
 if ACTIVE
-	receiving(M)
+	(*@\textit{receiving(M)}@*)
 		min = min{min, M}
-		neighbours = neighbours - {sender}
-		if |neighbours| = 1 //leaf
+		neighbors = neighbors - {sender}
+		if |neighbors| = 1 //leaf
 			M = ('Saturation', min)
-			parent = neighbours	
+			parent = neighbors	
 			send(M) to parent
 			become(PROCESSING)
 \end{lstlisting}
 \newpage
 \begin{lstlisting}			
 if PROCESSING
-	receiving(M)
+	(*@\textit{receiving(M)}@*)
 		min = MIN{min, M}
 		notification = ('Resolution', min)
 		send (Notification) to N(X) - parent
@@ -336,31 +352,36 @@ if PROCESSING
 		else
 			become LARGE									
 \end{lstlisting}
-\textbf{Complexity:} M(minimum) = 2(n-1) + n + n - 2 where 2(n-1) is the cost for the activation; n the cost for saturation and n - 2 the cost for notification.\\
-$$M(minimum) = 4n - 4$$
+\textbf{Complexity} \\
+$M(minimum) = 2\times(n-1) + n + n - 2$ where $2\times(n-1)$ is the cost for the activation; $n$ the cost for saturation and $n - 2$ the cost for notification.$M(minimum) = 4n - 4 = \mathcal{O}(n)$
+
 \subsection*{Ranking problem in arbitrary networks}
-\textbf{Definition:} Given a graph G(V, E) rank it from the lowest value to the largest.\\
-\textbf{Solution:} In an arbitrary network, this problem could be solved in the following way:
-\begin{itemize}
+\textbf{Definition:} \\Given a graph G(V, E) rank it from the lowest value to the largest.\\ ~ \\
+\textbf{Solution}\\In an arbitrary network, this problem could be solved in the following way:
+\begin{compactitem}
 \item Find a spanning tree
 \item Use saturation and the minimum finding to find a starting node
 \item Do ranking (Centralized or De-centralized)
-\end{itemize}
+\end{compactitem}
 \subsubsection*{Centralized ranking}
-This problem could be solved in the following way:\\
-\begin{itemize}
+This problem could be solved in the following way:
+\begin{compactitem}
 \item Build a spanning tree using SHOUT algorithm
-\item We elect a leader(minimum) using saturation technique
+\item Elect a leader (minimum) using saturation technique
 \item The leader knows the minimum, it sends in that direction a ranking message.
 \item Every node knows the minimum in its subtrees, it can then forward the ranking message (ranking, minimum) in the right direction.
 \item When the node to be ranked receives the message it sends up a notification and update message(new-minimum) that will travel up to the leader.
-\end{itemize}
-\textbf{Complexity:} $$M(rank\_centr) = 2(n-1)+ 2(n-2)+ ... + 2(1)= n(n-1)$$ 
+\end{compactitem}
+~ \\
+\textbf{Complexity}
+$$M(rank\_centr) = 2\times(n-1)+ 2\times(n-2)+ ... + 2(1)= n\times(n-1)$$ 
+\clearpage
 \subsubsection*{De-centralized ranking}
-\textbf{Solution:} The starter node sends a ranking message of the form: (first, second, rank) in the direction of the first. The first has the smallest value, the second the second smallest known so far. If no value is indicated (or the value is $\infty$ ) it means that the smallest in the corresponding subtree is unknown(for the moment).\\
-The ranked node attempts to send a ranking message to the next node to be ranked. The second variable of the rank message is updated during its travel and the minimum values on the links of the tree are also updated.\\
-\textbf{Complexity:} $$M(rank\_decentr) = 2(n-1)+ (n-2)+ (n-3)+ ...+ 1= (n-1)n/2+ (n-1)= (n-1)(n/2+1)$$
-\textbf{Code:}
+\textbf{Solution}\\
+The starter node sends a ranking message of the form: (first, second, rank) in the direction of the first. The first has the smallest value, the second the second smallest known so far. If no value is indicated (or the value is $\infty$ ) it means that the smallest in the corresponding subtree is unknown (at the moment).\\
+The ranked node attempts to send a ranking message to the next node to be ranked. The second variable of the rank message is updated during its travel and the minimum values on the links of the tree are also updated.\\ ~ \\
+\textbf{Complexity} \\ $M(rank\_decentr) = 2\times(n-1)+ (n-2)+ (n-3)+ ...+ 1= (n-1)n/2+ (n-1)= (n-1)(\frac{n}{2}+1)$ \\ ~ \\
+\textbf{Code}
 \begin{itemize}
 \item Build a spanning tree using SHOUT
 \item We elect a leader (e.i. minimum using saturation technique)
@@ -580,7 +601,7 @@ Parameters:
 There could be many approach in which we can store our inforation.
 \begin{itemize}
 \item Centralized approach: we send a request to the server. We use $O(N)$ memory on the server, search $O(1)$ step to reach the server
-\item Decentralized approach: we send a request to all our neighbours (different optimizations, e.i. TTL). We use $O(1)$ memory and we use $O(n^2)$ steps for the search.
+\item Decentralized approach: we send a request to all our neighbors (different optimizations, e.i. TTL). We use $O(1)$ memory and we use $O(n^2)$ steps for the search.
 \end{itemize}
 Another approach is to have \textbf{distributed hash tables} in the system. It's a good compromise for what regard the complexity of the operations. We use $O(\log(N))$ steps to find the informations and $O(\log(N))$ entries in the routing table of each node.\\
 Technique: 
@@ -701,14 +722,14 @@ Let's put some rules, the intruder:
 Initially the agents are located at the homebase and form a team while in the end the agents capture (surround) the intruder. \\
 The intruder capture problem is equivalent to the decontamination problem.\\
 As said initially the agents are located at the homebase and form a team. The whole network is contaminated (except the homebase). An agent cleans a node when it enters in it. At the end the whole network must be clean.\\
-\textbf{Contamination rule:} a node is contaminated if it is not protected by an agent and at least one of its neighbours is contaminated (remember that the intruder is fast). 
+\textbf{Contamination rule:} a node is contaminated if it is not protected by an agent and at least one of its neighbors is contaminated (remember that the intruder is fast). 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{img/cont.png}
   \caption{Contaminated node}
   \label{fig:boat1}
 \end{figure}
-\textbf{Decontamination process:} As said several times, initially the agents are located at the homebase and form a team. The whole network is contaminated (except the homebase). An agent cleans a node or an edge when it enters (or traverse the edge) in it, a node should not be recontaminated. A node becomes contaminated if it is not protected by an agent and at least one of its neighbours is contaminated.\\
+\textbf{Decontamination process:} As said several times, initially the agents are located at the homebase and form a team. The whole network is contaminated (except the homebase). An agent cleans a node or an edge when it enters (or traverse the edge) in it, a node should not be recontaminated. A node becomes contaminated if it is not protected by an agent and at least one of its neighbors is contaminated.\\
 \subsection*{Contiguous monotone strategies}
 We consider the situration where agent move only to neighbouring nodes (contiguous) and no recontamination can occur(monotone).
 \begin{figure}[H]
@@ -725,7 +746,7 @@ We consider the situration where agent move only to neighbouring nodes (contiguo
 \item Memory (agents, nodes(whiteboard))
 \end{itemize}
 Strategies are not necessarily connected and monotone (i.e. agents can jump. We have to minimize the number of searchers).\\
-There are two model of visibility, one with visibility of the other neighbours (clean, contaminated, guarded) and the other in which agents have only local knowledge.
+There are two model of visibility, one with visibility of the other neighbors (clean, contaminated, guarded) and the other in which agents have only local knowledge.
 \subsubsection*{Decontaminating a mesh}
 We have to be in this situation: 
 \begin{itemize}
