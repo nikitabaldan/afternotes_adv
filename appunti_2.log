@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  7 JAN 2019 17:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  7 JAN 2019 17:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1332,10 +1332,10 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 764.
+ne 775.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 765--766
+Underfull \hbox (badness 10000) in paragraph at lines 776--777
 
  []
 
@@ -1345,30 +1345,30 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 766.
+ne 777.
 
 <img/ring1.png, id=128, 684.5575pt x 400.49625pt>
 File: img/ring1.png Graphic file (type png)
 <use img/ring1.png>
-Package pdftex.def Info: img/ring1.png  used on input line 773.
+Package pdftex.def Info: img/ring1.png  used on input line 784.
 (pdftex.def)             Requested size: 209.12778pt x 122.34978pt.
 <img/ring2.png, id=129, 694.595pt x 398.48875pt>
 File: img/ring2.png Graphic file (type png)
 <use img/ring2.png>
-Package pdftex.def Info: img/ring2.png  used on input line 778.
+Package pdftex.def Info: img/ring2.png  used on input line 789.
 (pdftex.def)             Requested size: 209.12778pt x 119.97318pt.
 <img/ring3.png, id=130, 712.6625pt x 457.71pt>
 File: img/ring3.png Graphic file (type png)
 <use img/ring3.png>
-Package pdftex.def Info: img/ring3.png  used on input line 783.
+Package pdftex.def Info: img/ring3.png  used on input line 794.
 (pdftex.def)             Requested size: 209.12778pt x 134.3109pt.
 <img/ring4.png, id=131, 708.6475pt x 408.52625pt>
 File: img/ring4.png Graphic file (type png)
 <use img/ring4.png>
-Package pdftex.def Info: img/ring4.png  used on input line 788.
+Package pdftex.def Info: img/ring4.png  used on input line 799.
 (pdftex.def)             Requested size: 209.12778pt x 120.55783pt.
 [27 <./img/ring1.png> <./img/ring2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 792--793
+Underfull \hbox (badness 10000) in paragraph at lines 803--804
 
  []
 
@@ -1378,15 +1378,15 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 793.
+ne 804.
 
 <img/cont.png, id=137, 554.07pt x 349.305pt>
 File: img/cont.png Graphic file (type png)
 <use img/cont.png>
-Package pdftex.def Info: img/cont.png  used on input line 808.
+Package pdftex.def Info: img/cont.png  used on input line 819.
 (pdftex.def)             Requested size: 209.12778pt x 131.84184pt.
 [28 <./img/ring3.png> <./img/ring4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 812--813
+Underfull \hbox (badness 10000) in paragraph at lines 823--824
 
  []
 
@@ -1396,12 +1396,12 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 813.
+ne 824.
 
 <img/cont_2.png, id=143, 716.6775pt x 419.5675pt>
 File: img/cont_2.png Graphic file (type png)
 <use img/cont_2.png>
-Package pdftex.def Info: img/cont_2.png  used on input line 817.
+Package pdftex.def Info: img/cont_2.png  used on input line 828.
 (pdftex.def)             Requested size: 209.12778pt x 122.4269pt.
 [29 <./img/cont.png> <./img/cont_2.png>]
 
@@ -1410,10 +1410,10 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 830.
+ne 841.
 
 
-Overfull \hbox (5.61801pt too wide) in paragraph at lines 845--846
+Overfull \hbox (5.61801pt too wide) in paragraph at lines 856--857
 []\T1/futs/m/n/10.95 Contiguously clean the con-tam-i-nated net-work by main-ta
 in-ing a ver-ti-cal bar-rier of agents
  []
@@ -1421,7 +1421,7 @@ in-ing a ver-ti-cal bar-rier of agents
 <img/cont_front.png, id=149, 686.565pt x 368.37625pt>
 File: img/cont_front.png Graphic file (type png)
 <use img/cont_front.png>
-Package pdftex.def Info: img/cont_front.png  used on input line 850.
+Package pdftex.def Info: img/cont_front.png  used on input line 861.
 (pdftex.def)             Requested size: 209.12778pt x 112.20563pt.
 [30 <./img/cont_front.png>] (./appunti_2.aux)
 
@@ -1448,7 +1448,7 @@ mbol10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol8
 hare/texlive/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/adobe/utopia/putri8a.pfb>
-Output written on appunti_2.pdf (30 pages, 1916237 bytes).
+Output written on appunti_2.pdf (30 pages, 1916909 bytes).
 PDF statistics:
  190 PDF objects out of 1000 (max. 8388607)
  105 compressed objects within 2 object streams
