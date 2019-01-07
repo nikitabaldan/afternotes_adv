@@ -48,7 +48,7 @@
 %  \centering
 %  \includegraphics[width=0.55\textwidth]{img/image}
 %  \caption{caption}
-%  \label{fig:boat1}
+%  
 %\end{figure}
 
 
@@ -150,7 +150,7 @@ We want to build a spanning tree in a distributed system, but we have to conside
   \centering
   \includegraphics[width=0.9\textwidth]{img/shout.png}
   \caption{Example of SHOUT}
-  \label{fig:boat1}
+  
 \end{figure}
 \newpage
 \textbf{Code:} We have four states, INITIATOR, IDLE, ACTIVE, DONE; the terminal state is DONE.
@@ -479,7 +479,7 @@ Observations:
   \centering
   \includegraphics[width=0.7\textwidth]{img/asfar.png}
   \caption{AsFar example}
-  \label{fig:boat1}
+  
 \end{figure}
 \textbf{Code} \\The states are ASLEEP, AWAKE, FOLLOWER, LEADER; the starting state is ASLEEP, the terminal states are FOLLOWER and LEADER.\\ \\
 \textbf{Unidirectional version}
@@ -559,7 +559,7 @@ An example could be done with $f(i) = 2^i$. When a node receives a message conta
   \centering
   \includegraphics[width=0.4\textwidth]{img/fi.png}
   \caption{Graphical example of 2$^i$ delay}
-  \label{fig:boat1}
+  
 \end{figure}
 
 \textbf{Complexity} \\ 
@@ -585,7 +585,7 @@ Setting $i$ as the smallest ID and $Id$ as the biggest ID we obtain a time compl
   \centering
   \includegraphics[width=0.6\textwidth]{img/p2p.png}
   \caption{p2p architecture}
-  \label{fig:boat1}
+  
 \end{figure}
 
 \subsection*{Search}
@@ -596,7 +596,7 @@ When a resource request arrives, the server returns the list of the peers that s
   \centering
   \includegraphics[width=0.6\textwidth]{img/search_n.png}
   \caption{Search in hybrid P2P systems}
-  \label{fig:boat1}
+  
 \end{figure}
 
 
@@ -609,13 +609,13 @@ When the search starts, requests from a peer R are sent from neighbor to neighbo
   \centering
   \includegraphics[width=0.55\textwidth]{img/gnu1.png}
   \caption{PING with Gnutella}
-  \label{fig:boat1}
+  
 \end{figure}
  \begin{figure}[H]
   \centering
   \includegraphics[width=0.55\textwidth]{img/gnu2.png}
   \caption{PONG with Gnutella}
-  \label{fig:boat1}
+  
 \end{figure}
 
 
@@ -715,7 +715,7 @@ The logical space is a circular ring 0,..., $2^m-1$  (mod $2^m$). A resource wit
   \centering
   \includegraphics[width=0.6\textwidth]{img/chord_ex.png}
   \caption{Example of how Chord assigns IDs}
-  \label{fig:boat1}
+  
 \end{figure}
 \textbf{Successor:} the successor of peer 22 is 87, of 87 is 103, of 103 is 22.\\
 \textbf{Routing Algorithm \#1:} each node stores only its successor. If the resource is not on this node, then the query is sent to the successor.\\
@@ -736,29 +736,29 @@ Here below it will be provided some examples of how this algorithm works.
   \centering
   \includegraphics[width=1\textwidth]{img/chord1.png}
   \caption{First assignment with Chord}
-  \label{fig:boat1}
+  
 \end{figure} \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{img/chord2.png}
   \caption{Second node joins}
-  \label{fig:boat1}
+  
 \end{figure} \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{img/chord3.png}
   \caption{Third and forth joins}
-  \label{fig:boat1}
+  
 \end{figure}
  \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{img/chord4.png}
   \caption{Item assignment}
-  \label{fig:boat1}
+  
 \end{figure}
  \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{img/chord_query.png}
   \caption{Routing after having received a query}
-  \label{fig:boat1}
+  
 \end{figure}
 
 \textbf{Complexity}\\
@@ -785,86 +785,101 @@ The agents, starting from the home base, must explore using cautious walk. The a
   \centering
   \includegraphics[width=0.5\textwidth]{img/ring1.png}
   \caption{First step of the left agent}
-  \label{fig:boat1}
+  
 \end{figure} \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{img/ring2.png}
   \caption{First step of the right agent}
-  \label{fig:boat1}
+  
 \end{figure} \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{img/ring3.png}
   \caption{Black hole for the right agent}
-  \label{fig:boat1}
+  
 \end{figure} \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{img/ring4.png}
   \caption{Left agent complete the ring and knows where is the black hole (for the whiteboard)}
-  \label{fig:boat1}
+  
 \end{figure}
 \clearpage
 \subsection*{The intruder capture problem}
 What if the intruder is also mobile?\\
 Let's put some rules, the intruder:
-\begin{itemize}
-\item can moves from a node to a neighbouring one
-\item can moves arbitrarily fast
+\begin{compactitem}
+\item can move from a node to a neighboring one
+\item can move arbitrarily fast
 \item cannot cross a node guarded by an agent
 \item is invisible to the agents
 \item can permanently see the position of the other agents
-\end{itemize}
+\end{compactitem}
+
 Initially the agents are located at the homebase and form a team while in the end the agents capture (surround) the intruder. \\
 The intruder capture problem is equivalent to the decontamination problem.\\
-As said initially the agents are located at the homebase and form a team. The whole network is contaminated (except the homebase). An agent cleans a node when it enters in it. At the end the whole network must be clean.\\
+As said, initially the agents are located at the homebase and form a team. The whole network is contaminated (except the homebase). An agent cleans a node when it enters in it. At the end the whole network must be clean.\\ ~ \\
 \textbf{Contamination rule:} a node is contaminated if it is not protected by an agent and at least one of its neighbors is contaminated (remember that the intruder is fast). 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{img/cont.png}
   \caption{Contaminated node}
-  \label{fig:boat1}
+  
 \end{figure}
-\textbf{Decontamination process:} As said several times, initially the agents are located at the homebase and form a team. The whole network is contaminated (except the homebase). An agent cleans a node or an edge when it enters (or traverse the edge) in it, a node should not be recontaminated. A node becomes contaminated if it is not protected by an agent and at least one of its neighbors is contaminated.\\
+\textbf{Decontamination process:} As said several times, initially the agents are located at the homebase and form a team. The whole network is contaminated (except for the homebase). An agent cleans a node or an edge when it enters (or traverses the edge) in it; a node should not be recontaminated. A node becomes contaminated if it is not protected by an agent and at least one of its neighbors is contaminated.
+
+\clearpage
+
 \subsection*{Contiguous monotone strategies}
-We consider the situration where agent move only to neighbouring nodes (contiguous) and no recontamination can occur(monotone).
+We consider the situation where agents move only to neighboring nodes (contiguous) and no recontamination can occur (monotone).
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{img/cont_2.png}
-  \caption{Contaminated node}
-  \label{fig:boat1}
+  \caption{Contaminated nodes}
+  
 \end{figure}
 \textbf{Complexity issues:}
-\begin{itemize}
+\begin{compactitem}
 \item Number of agents
 \item Number of moves
 \item Time (sync or async)
-\item Memory (agents, nodes(whiteboard))
-\end{itemize}
+\item Memory (agents, nodes (whiteboard))
+\end{compactitem}
 Strategies are not necessarily connected and monotone (i.e. agents can jump. We have to minimize the number of searchers).\\
 There are two model of visibility, one with visibility of the other neighbors (clean, contaminated, guarded) and the other in which agents have only local knowledge.
 \subsubsection*{Decontaminating a mesh}
 We have to be in this situation: 
-\begin{itemize}
+\begin{compactitem}
 \item Asynchronous system
-\item Node + agent storafe $O(\log(n))$ bits
+\item Node + agent storage $\mathcal{O}(\log(n))$ bits
 \item Models (visibility, local)
-\end{itemize}
-We consider a m x n mesh topology. We have two possible strategies:
-\begin{itemize}
+\end{compactitem}
+~ \\ 
+We consider a $m \times n$ mesh topology. We have two possible strategies:
+\begin{compactenum}
 \item With synchronizer: Searching agents do not have visibility power. The synchronizer is an agent that coordinates the moves.
-\item Agents with visibility: Visibility power means agent can see their neighbouring nodes, agents can move independently, the synchronizer is not required.
-\end{itemize}
+\item Agents with visibility: Visibility power means that agents can see their neighboring nodes and can move independently; the synchronizer is not required.
+\end{compactenum}
+~ \\ 
 The main idea behind the strategy is to: 
-\begin{itemize}
+\begin{compactenum}
 \item Start from the homebase
-\item Contiguously clean the contaminated network by maintaining a vertical barrier of agents (to avoid recomtamination, works asynchronously)
+\item Contiguously clean the contaminated network by maintaining a vertical barrier of agents (to avoid recontamination, works asynchronously)
 \item Move one column at the time
-\end{itemize}
+\end{compactenum}
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{img/cont_front.png}
   \caption{Contaminated node}
-  \label{fig:boat1}
+  
 \end{figure}
 We can perform the search of a node or of an edge moving the barrier. (see slides)
+\\
+With a synchronizer: \\
+Time complexity: $\mathcal{O}(n\cdot m)$ \\
+Moves complexity: $\mathcal{O}(m^2 + n\cdot m)$
+
+~ \\
+Without a synchronizer (i.e. agents with visibility): \\
+Time complexity: $\mathcal{O}(n + m)$ \\ 
+Moves complexity: $\mathcal{O}(m^2 + n\cdot m)$
 
 \end{document}
