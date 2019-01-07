@@ -591,17 +591,19 @@ Setting $i$ as the smallest ID and $Id$ as the biggest ID we obtain a time compl
 \subsection*{Search}
 \subsubsection*{Hybrid p2p}
 \textbf{Napster} presents a centralized lookup. The peers send metadata to the look-up server.\\
-When a resource request arrives, the server returns the list of the peers that store the resource. Data are then exchanged among peers.
+When a resource request arrives, the server returns the list of the peers that store the resource. Data is then exchanged among peers.
  \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth]{img/search_n.png}
-  \caption{Search in hybrid p2p systems}
+  \caption{Search in hybrid P2P systems}
   \label{fig:boat1}
 \end{figure}
-\subsubsection*{Unstructured pure p2p}
-\textbf{Gnutella} is a pure p2p without a central server. Peers have an initial set of addresses known for the first connection; peers are equally treated, no metter which bandwidth they have and how many files they share. Each peer provides both the files and sends/replies to routing requests. Each peer is both client and server.\\
-Each peer knows a subset of neighbouring peers, there are some cache servers that maintains as many peer addresses as possible; when the application starts, it contacts one of these cache servers that will add the p2p network to the new peer.\\
-When the search starts, requests from a peer R are sent from neighbour to neighbour (PING). The message stops either when the resource is found or after a limited and predefined number of steps(TTL = time to live). If the resource has been found, the address of the peer P that stores it, sends to R(PONG). R will directly contact P and will download the resource.
+
+
+\subsubsection*{Unstructured pure P2P}
+\textbf{Gnutella} is a pure P2P without a central server. Peers have an initial set of addresses known for the first connection; peers are equally treated, no matter the bandwidth they have and how many files they share. Each peer provides both the files and sends/replies to routing requests. Each peer is both client and server.\\
+Each peer knows a subset of neighboring peers and there are some cache servers that maintain as many peer addresses as possible; when the application starts, it contacts one of these cache servers that will add the peer to the P2P network.\\
+When the search starts, requests from a peer R are sent from neighbor to neighbor (PING). The message stops either when the resource is found or after a limited and predefined number of steps (TTL = time to live). If the resource has been found, the address of the peer P that stores it is sent (PONG) to R [R's ID is sent together with the request]. Afterwards, R will directly contact P and will download the resource.
 \textbf{Problem:} hard to control/regulate 
  \begin{figure}[H]
   \centering
@@ -612,94 +614,122 @@ When the search starts, requests from a peer R are sent from neighbour to neighb
  \begin{figure}[H]
   \centering
   \includegraphics[width=0.55\textwidth]{img/gnu2.png}
-  \caption{PONG with nutella}
+  \caption{PONG with Gnutella}
   \label{fig:boat1}
 \end{figure}
+
+
 \subsubsection*{Iterative deepening}
-\begin{itemize}
+Gnutella's search method has some limits:
+\begin{compactenum}
+	\item R might receive redundant results or nothing
+	\item the TTL needs to be tuned: a too-low one will result in a resource not found, whilst a too-high one will flood the network with requests (and possibly answers). It is also possible that the too many requests turn into a DDoS!
+\end{compactenum}
+To address these problems, unstructured pure P2P systems such as Gnutella use a technique called \textit{iterative deepening}.
+\begin{compactenum}
 \item The system is flooded with a limited TTL
-\item If the resource is not found, we start with a bigger TTL
+\item If the resource is not found, we start with a bigger TTL (the sequence of TTL's is predefined)
 \item We repeat up to when the resource is found or when a boundary TTL is found
+
 Many variations: blind, informed...
-\end{itemize}
-\newpage
-\subsubsection*{Super peer (ZaZaA)}
-It behaves like a pure and a hybrid p2p system.
-\begin{itemize}
-\item There are different servers, the super peers supervives the subnetworks (subtrees)
-\item The super peers execute the queries for the leaves (e.i. they work as servers)
-\item The super peers are also operate as normal peers
+\end{compactenum}
+
+\subsubsection*{Super peer (KaZaA)}
+Combines characteristics of pure and a hybrid P2P systems.
+\begin{compactitem}
+\item There are different servers; the super peers supervise the subnetworks (subtrees)
+\item The super peers execute the queries for the leaves (i.e. they work as servers)
+\item The super peers also operate as normal peers
 \item The peers exchange information directly
 \item Combine the characteristics of hybrid and pure systems
-\end{itemize}
-\textbf{Search?} We have to do some questions:
-\begin{itemize}
+\end{compactitem}
+\textbf{Search} \\
+We need to consider the following questions:
+\begin{compactitem}
 \item Good numbers  of leaves for each super peer?
 \item How should super peers connect together?
 \item The system is made more reliable k redundant
-\end{itemize}
+\end{compactitem}
+
+
 \subsection*{Bit Torrent}
-Many users can simultaneously download the same file without delay too much each other. Files are not downloaded from the same server but they are divided into different portions. Each peer that makes a request, offers already downloaded portions to the other peers, thus contributing to the downloading of the other peers.\\
+Many users can simultaneously download the same file without delaying too much each other. Files are not downloaded from the same server but they are divided into different portions. Each peer that makes a request offers already downloaded portions to the other peers, thus contributing to the downloading of the other peers.\\
 We concentrate on the efficient fetching and not on the search. There is a single publisher and many downloaders. The same file is distributed among many peers. 
 \subsection*{Information storage}
-The main questions are: where to store information in a p2p system? How to find it?\\
+The main questions are: where to store information in a P2P system? How to find it?\\
 Parameters: 
-\begin{itemize}
+\begin{compactitem}
 \item System scalability: limit the communication overhead and the memory used by the nodes with respect to the number of nodes in the system.
 \item Robustness and adaptability: in the presence of failures and changes
-\end{itemize}
-There could be many approach in which we can store our inforation.
-\begin{itemize}
-\item Centralized approach: we send a request to the server. We use $O(N)$ memory on the server, search $O(1)$ step to reach the server
-\item Decentralized approach: we send a request to all our neighbors (different optimizations, e.i. TTL). We use $O(1)$ memory and we use $O(n^2)$ steps for the search.
-\end{itemize}
-Another approach is to have \textbf{distributed hash tables} in the system. It's a good compromise for what regard the complexity of the operations. We use $O(\log(N))$ steps to find the informations and $O(\log(N))$ entries in the routing table of each node.\\
+\end{compactitem}
+~ \\
+There could be many approaches to store our information.
+\begin{compactitem}
+\item Centralized approach: we send a request to the server. We use $\mathcal{O}(N)$ memory on the server, search $\mathcal{O}(1)$ step to reach the server
+\item Decentralized approach: we send a request to all our neighbors (different optimizations, i.e. TTL). We use $\mathcal{O}(1)$ memory and we use $\mathcal{O}(n^2)$ steps for the search.
+\end{compactitem}
+
+\subsubsection*{Distributed Hash Tables}
+They offer a decent memory/step tradeoff. We use $\mathcal{O}(\log(N))$ steps to find the information and $\mathcal{O}(\log(N))$ entries in the routing table of each node.\\
 Technique: 
-\begin{itemize}
-\item Adaptability: it is simple to insert (assing thge information) and remove nodes (reassignment to the neighbouring nodes)
+\begin{compactitem}
+\item Adaptability: it is simple to insert (adding the information) and remove nodes (reassignment to the neighboring nodes)
 \item Balances information on the nodes (makes routing efficient)
-\end{itemize}
-Peers and data are mapped in the same address space throungh hash functions. For nodes the hash of the IP; for data hash of the content (title, ...)\\
+\end{compactitem}
+
+Peers and data are mapped in the same address space through hash functions. For nodes we use the hash of their IP; for data we use the hash of the content (title, ...).
+
 \subsection*{Chord}
-\textbf{Data distribution:} data are distributed among peers using a precise algorithm. Data are replicated to improve availability.\\
-\textbf{Assignment:}
-\begin{itemize}
+\textbf{Data distribution}\\
+Data are distributed among peers using a precise algorithm. Data are replicated to improve availability.\\ ~ \\
+\textbf{Assignment}
+\begin{compactitem}
 \item Each peer has an ID (hash of the IP)
 \item Each resource has a key (hash of the title, ...)
-\item We use long keys to avoid collision
-\item The peers stores resources with keys similar to one of the peers
+\item We use long keys to avoid collisions
+\item A single peer stores resources with keys similar to the one of the peer itself (same logical addressing space)
 \item Given a key of a resource the peer sends the request to the peer with the most similar key
-\end{itemize}
-Using Chrod we have to use a consistent hashing:
-\begin{itemize}
+\end{compactitem}
+
+~ \\
+Using Chord we have to use a consistent hashing:
+\begin{compactitem}
 \item To assign the keys to the peers
 \item There should be load balancing so that with very high probability each peer receives the same number of resources/keys
 \item We ask for key updates when a peer connects/disconnects from the network
-\item The insertion of the N-th key with hight probability will require the movement of 1/N other keys
-\end{itemize}
-\textbf{Advantages:}
-\begin{itemize}
-\item We maintain consisting hashing although the information is not stored in all the nodes
+\item The insertion of the N-th key with high probability will require the movement of 1/N other keys
+\end{compactitem}
+ ~ \\
+\textbf{Advantages}
+\begin{compactitem}
+\item We maintain consistent hashing although the information is not stored in all the nodes
 \item The system is simple, correctness and performance are easy to prove
-\item It takes at most $O(\log(N))$ to reach the destination
-\item A peer requires a table of $O(\log(N))$ bits for an efficent routing, but the performance decrease when the tables are not updated
+\item It takes at most $\mathcal{O}(\log(N))$ to reach the destination
+\item A peer requires a table of $\mathcal{O}(\log(N))$ bits for an efficient routing, but the performance decreases when the tables are not updated
 \item The insertion/removal of a node generates $O(\log^2(N))$ messages
-\end{itemize}
-\textbf{Idea:} The logical space is circular O,..., 2$^m$-1, ring (mod 2$^m$). A resource with key K is stored in the node which is the closest successor from K (successor(K)).
+\end{compactitem}
+ ~ \\ 
+\textbf{Idea} \\
+The logical space is a circular ring 0,..., $2^m-1$  (mod $2^m$). A resource with key K is stored in the node which is the closest successor from K, that we call \textit{successor(K)}.
  \begin{figure}[H]
   \centering
   \includegraphics[width=0.6\textwidth]{img/chord_ex.png}
-  \caption{Example of how Chord assign ID}
+  \caption{Example of how Chord assigns IDs}
   \label{fig:boat1}
 \end{figure}
 \textbf{Successor:} the successor of peer 22 is 87, of 87 is 103, of 103 is 22.\\
-\textbf{Routing:} each node stores only its successor. If the resource is not on this node, then the query is sent to the successor.\\
-It requires $O(1)$ of memory, $O(N)$ for search: in the worst case we have to visit the whole ring. The failure of a node blocks the procedure.\\
-This algorithm in the worst case it requires too many operations (we maintain other routing informations).\\
-Note that this extra information is not required for the correctness of the procedure but it helps speeding up the search. This protocol works given that the calue of the next successor is correctly maintained/updated.\\
-The best solution is that each node stores m values. The search of k is sent to the furthest known predecessor of k. We store more values of the close nodes and less of more distant nodes, routing is more precise close to a node. It requires $O(\log(N))$ of memory and $O(\log(N))$ for the search.\\
-\textbf{Finger table}\\
-Each node maintains a finger table (the i-th entry of the finger table of x is the first node that succeeds equals (x + 2$^i$) mod 2$^m$) and the predecessor node. An item is identified by id is stored on the successor node of id.
+\textbf{Routing Algorithm \#1:} each node stores only its successor. If the resource is not on this node, then the query is sent to the successor.\\
+It requires $\mathcal{O}(1)$ of memory, $\mathcal{O}(N)$ for search: in the worst case we have to visit the whole ring. The failure of a node blocks the procedure.\\
+This algorithm, in the worst case, requires too many operations. To solve this problem, let's maintain other routing information.\\ Note that this extra information is not required for the correctness of the procedure but it helps speeding up the search. Also, this protocol works assuming that the value of the next successor is correctly maintained/updated.\\
+~ \\
+\textbf{Routing Algorithm \#2:}
+This solution is the opposite of \#1: each node stores N successors. If a resource K is not on a node, the node looks in the successor node.
+This requires $\mathcal{O}(N)$ memory and $\mathcal{O}(1)$ for the search.
+\\ ~ \\
+\textbf{Routing Algorithm \#3:}
+The best solution consists in storing \textit{m} values in each node. The search of \textit{K} is sent to the furthest known predecessor of \textit{K}. We store more values of the close nodes and less of more distant nodes, thus routing is more precise close to a node. This approach requires $\mathcal{O}(\log(N))$ of memory and $\mathcal{O}(\log(N))$ for the search.\\
+Each node maintains a \textit{finger table} (the i-th entry of the finger table of x is the first node that succeeds or equals $(x + 2^i) mod 2^m)$ and the predecessor node. An item identified by ID is stored on the successor node of ID.
+\clearpage
 \subsubsection*{Examples}
 Here below it will be provided some examples of how this algorithm works. 
  \begin{figure}[H]
@@ -730,7 +760,18 @@ Here below it will be provided some examples of how this algorithm works.
   \caption{Routing after having received a query}
   \label{fig:boat1}
 \end{figure}
+
+\textbf{Complexity}\\
+Theorem: In a CHORD network with m-bits IDs, the number
+of nodes that has to be traversed for the routing of a single
+query is at most m. Hence $steps(Chord) = \mathcal{O}(m)$.
+Theorem: Given a query q the number of nodes that has to
+be traversed to find the successor of q in a CHORD ring of N
+nodes is, with high probability, $\mathcal{O}(log N)$.
+Theorem: The finger table of a node x contains at most $\mathcal{O}(\log N)$ distinct entities.
+
 \newpage
+
 \section*{Mobile agents and the black hole problem}
 \textbf{Definition:} Consider that we have some mobile agents that can travel across the graph and could communicate together with a whiteboard and they also have some storage, the problem is to find a malicious node (black hole) that makes disappear our mobile agents. Each agent knows the number of nodes.\\
 \subsection*{Cautious walk}

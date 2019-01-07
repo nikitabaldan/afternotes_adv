@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  7 JAN 2019 15:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  7 JAN 2019 17:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1204,18 +1204,18 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 601.
+ne 603.
 
 <img/gnu1.png, id=84, 512.91624pt x 312.16624pt>
 File: img/gnu1.png Graphic file (type png)
 <use img/gnu1.png>
-Package pdftex.def Info: img/gnu1.png  used on input line 608.
+Package pdftex.def Info: img/gnu1.png  used on input line 610.
 (pdftex.def)             Requested size: 230.04182pt x 140.0067pt.
 [19 <./img/p2p.png> <./img/search_n.png>]
 <img/gnu2.png, id=91, 505.89pt x 325.215pt>
 File: img/gnu2.png Graphic file (type png)
 <use img/gnu2.png>
-Package pdftex.def Info: img/gnu2.png  used on input line 614.
+Package pdftex.def Info: img/gnu2.png  used on input line 616.
 (pdftex.def)             Requested size: 230.04182pt x 147.88373pt.
 
 
@@ -1224,7 +1224,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 618.
+ne 622.
 
 [20 <./img/gnu1.png> <./img/gnu2.png>]
 
@@ -1233,7 +1233,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 626.
+ne 637.
 
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
@@ -1241,7 +1241,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 641.
+ne 655.
 
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
@@ -1249,61 +1249,81 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 644.
+ne 658.
+
+
+Class scrartcl Warning: incompatible usage of \@ssect detected.
+(scrartcl)              You've used the KOMA-Script implementation of \@ssect
+(scrartcl)              from within a non compatible caller, that does not
+(scrartcl)              \scr@s@ct@@nn@m@ locally.
+(scrartcl)              This could result in several error messages on input li
+ne 672.
 
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 662--663
-
- []
-
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              You've used the KOMA-Script implementation of \@ssect
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 663.
+ne 682.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 683--687
+
+ []
 
 <img/chord_ex.png, id=100, 744.7825pt x 432.61626pt>
 File: img/chord_ex.png Graphic file (type png)
 <use img/chord_ex.png>
-Package pdftex.def Info: img/chord_ex.png  used on input line 691.
+Package pdftex.def Info: img/chord_ex.png  used on input line 716.
 (pdftex.def)             Requested size: 250.95587pt x 145.76733pt.
 [22]
+Underfull \hbox (badness 10000) in paragraph at lines 720--732
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 720--732
+
+ []
+
+[23 <./img/chord_ex.png>]
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              You've used the KOMA-Script implementation of \@ssect
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 703.
+ne 733.
 
-<img/chord1.png, id=104, 736.7525pt x 413.545pt>
+<img/chord1.png, id=108, 736.7525pt x 413.545pt>
 File: img/chord1.png Graphic file (type png)
 <use img/chord1.png>
-Package pdftex.def Info: img/chord1.png  used on input line 707.
+Package pdftex.def Info: img/chord1.png  used on input line 737.
 (pdftex.def)             Requested size: 418.25555pt x 234.77025pt.
-<img/chord2.png, id=105, 692.5875pt x 360.34625pt>
+<img/chord2.png, id=109, 692.5875pt x 360.34625pt>
 File: img/chord2.png Graphic file (type png)
 <use img/chord2.png>
-Package pdftex.def Info: img/chord2.png  used on input line 712.
+Package pdftex.def Info: img/chord2.png  used on input line 742.
 (pdftex.def)             Requested size: 418.25555pt x 217.617pt.
-[23 <./img/chord_ex.png>]
 <img/chord3.png, id=110, 715.67375pt x 463.7325pt>
 File: img/chord3.png Graphic file (type png)
 <use img/chord3.png>
-Package pdftex.def Info: img/chord3.png  used on input line 717.
+Package pdftex.def Info: img/chord3.png  used on input line 747.
 (pdftex.def)             Requested size: 418.25555pt x 271.01706pt.
 <img/chord4.png, id=111, 754.82pt x 460.72125pt>
 File: img/chord4.png Graphic file (type png)
 <use img/chord4.png>
-Package pdftex.def Info: img/chord4.png  used on input line 723.
+Package pdftex.def Info: img/chord4.png  used on input line 753.
 (pdftex.def)             Requested size: 418.25555pt x 255.28854pt.
- [24 <./img/chord1.png> <./img/chord2.png>]
+[24
+
+ <./img/chord1.png> <./img/chord2.png>]
 <img/chord_query.png, id=117, 761.84625pt x 474.77374pt>
 File: img/chord_query.png Graphic file (type png)
 <use img/chord_query.png>
-Package pdftex.def Info: img/chord_query.png  used on input line 729.
+Package pdftex.def Info: img/chord_query.png  used on input line 759.
 (pdftex.def)             Requested size: 418.25555pt x 260.64822pt.
  [25 <./img/chord3.png> <./img/chord4.png>] [26 <./img/chord_query.png>]
 
@@ -1312,10 +1332,10 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 734.
+ne 764.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 735--736
+Underfull \hbox (badness 10000) in paragraph at lines 765--766
 
  []
 
@@ -1325,30 +1345,30 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 736.
+ne 766.
 
 <img/ring1.png, id=128, 684.5575pt x 400.49625pt>
 File: img/ring1.png Graphic file (type png)
 <use img/ring1.png>
-Package pdftex.def Info: img/ring1.png  used on input line 743.
+Package pdftex.def Info: img/ring1.png  used on input line 773.
 (pdftex.def)             Requested size: 209.12778pt x 122.34978pt.
 <img/ring2.png, id=129, 694.595pt x 398.48875pt>
 File: img/ring2.png Graphic file (type png)
 <use img/ring2.png>
-Package pdftex.def Info: img/ring2.png  used on input line 748.
+Package pdftex.def Info: img/ring2.png  used on input line 778.
 (pdftex.def)             Requested size: 209.12778pt x 119.97318pt.
 <img/ring3.png, id=130, 712.6625pt x 457.71pt>
 File: img/ring3.png Graphic file (type png)
 <use img/ring3.png>
-Package pdftex.def Info: img/ring3.png  used on input line 753.
+Package pdftex.def Info: img/ring3.png  used on input line 783.
 (pdftex.def)             Requested size: 209.12778pt x 134.3109pt.
 <img/ring4.png, id=131, 708.6475pt x 408.52625pt>
 File: img/ring4.png Graphic file (type png)
 <use img/ring4.png>
-Package pdftex.def Info: img/ring4.png  used on input line 758.
+Package pdftex.def Info: img/ring4.png  used on input line 788.
 (pdftex.def)             Requested size: 209.12778pt x 120.55783pt.
 [27 <./img/ring1.png> <./img/ring2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 762--763
+Underfull \hbox (badness 10000) in paragraph at lines 792--793
 
  []
 
@@ -1358,15 +1378,15 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 763.
+ne 793.
 
 <img/cont.png, id=137, 554.07pt x 349.305pt>
 File: img/cont.png Graphic file (type png)
 <use img/cont.png>
-Package pdftex.def Info: img/cont.png  used on input line 778.
+Package pdftex.def Info: img/cont.png  used on input line 808.
 (pdftex.def)             Requested size: 209.12778pt x 131.84184pt.
 [28 <./img/ring3.png> <./img/ring4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 782--783
+Underfull \hbox (badness 10000) in paragraph at lines 812--813
 
  []
 
@@ -1376,12 +1396,12 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 783.
+ne 813.
 
 <img/cont_2.png, id=143, 716.6775pt x 419.5675pt>
 File: img/cont_2.png Graphic file (type png)
 <use img/cont_2.png>
-Package pdftex.def Info: img/cont_2.png  used on input line 787.
+Package pdftex.def Info: img/cont_2.png  used on input line 817.
 (pdftex.def)             Requested size: 209.12778pt x 122.4269pt.
 [29 <./img/cont.png> <./img/cont_2.png>]
 
@@ -1390,10 +1410,10 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 800.
+ne 830.
 
 
-Overfull \hbox (5.61801pt too wide) in paragraph at lines 815--816
+Overfull \hbox (5.61801pt too wide) in paragraph at lines 845--846
 []\T1/futs/m/n/10.95 Contiguously clean the con-tam-i-nated net-work by main-ta
 in-ing a ver-ti-cal bar-rier of agents
  []
@@ -1401,7 +1421,7 @@ in-ing a ver-ti-cal bar-rier of agents
 <img/cont_front.png, id=149, 686.565pt x 368.37625pt>
 File: img/cont_front.png Graphic file (type png)
 <use img/cont_front.png>
-Package pdftex.def Info: img/cont_front.png  used on input line 820.
+Package pdftex.def Info: img/cont_front.png  used on input line 850.
 (pdftex.def)             Requested size: 209.12778pt x 112.20563pt.
 [30 <./img/cont_front.png>] (./appunti_2.aux)
 
@@ -1428,7 +1448,7 @@ mbol10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol8
 hare/texlive/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/adobe/utopia/putri8a.pfb>
-Output written on appunti_2.pdf (30 pages, 1914622 bytes).
+Output written on appunti_2.pdf (30 pages, 1916237 bytes).
 PDF statistics:
  190 PDF objects out of 1000 (max. 8388607)
  105 compressed objects within 2 object streams
