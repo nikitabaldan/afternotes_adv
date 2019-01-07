@@ -289,7 +289,7 @@ But how can this technique be useful for our election problem?
 ~ \\
 
 \subsection*{Solution to the election problem}
-Let us assume we assign a label $v(x)$ to each node. Then, it is possible to:
+Let us assume we assign a label $v(x)$ to each node (notice that if nodes are indistinguishable, ranking is unsolvable). Then, it is possible to:
 \begin{compactenum}
 \item Run the saturation technique
 \item The two saturated nodes exchange the value and if it is different they can elect as a leader the one with smaller value.\\
@@ -354,7 +354,7 @@ if PROCESSING
 \end{lstlisting}
 \textbf{Complexity} \\
 $M(minimum) = 2\times(n-1) + n + n - 2$ where $2\times(n-1)$ is the cost for the activation; $n$ the cost for saturation and $n - 2$ the cost for notification.$M(minimum) = 4n - 4 = \mathcal{O}(n)$
-
+\\ ~ \\
 \subsection*{Ranking problem in arbitrary networks}
 \textbf{Definition:} \\Given a graph G(V, E) rank it from the lowest value to the largest.\\ ~ \\
 \textbf{Solution}\\In an arbitrary network, this problem could be solved in the following way:
@@ -370,7 +370,7 @@ This problem could be solved in the following way:
 \item Elect a leader (minimum) using saturation technique
 \item The leader knows the minimum, it sends in that direction a ranking message.
 \item Every node knows the minimum in its subtrees, it can then forward the ranking message (ranking, minimum) in the right direction.
-\item When the node to be ranked receives the message it sends up a notification and update message(new-minimum) that will travel up to the leader.
+\item When the node to be ranked receives the message it sends up a notification and update message \textit{(new-minimum)} that will travel up to the leader.
 \end{compactitem}
 ~ \\
 \textbf{Complexity}
@@ -378,94 +378,103 @@ $$M(rank\_centr) = 2\times(n-1)+ 2\times(n-2)+ ... + 2(1)= n\times(n-1)$$
 \clearpage
 \subsubsection*{De-centralized ranking}
 \textbf{Solution}\\
-The starter node sends a ranking message of the form: (first, second, rank) in the direction of the first. The first has the smallest value, the second the second smallest known so far. If no value is indicated (or the value is $\infty$ ) it means that the smallest in the corresponding subtree is unknown (at the moment).\\
+The starter node sends a ranking message of the form \textit{(first, second, rank)} in the direction of the first. The first has the smallest value, the second the second smallest known so far. If no value is indicated (or the value is $\infty$ ) it means that the smallest in the corresponding subtree is unknown (at the moment).\\
 The ranked node attempts to send a ranking message to the next node to be ranked. The second variable of the rank message is updated during its travel and the minimum values on the links of the tree are also updated.\\ ~ \\
 \textbf{Complexity} \\ $M(rank\_decentr) = 2\times(n-1)+ (n-2)+ (n-3)+ ...+ 1= (n-1)n/2+ (n-1)= (n-1)(\frac{n}{2}+1)$ \\ ~ \\
 \textbf{Code}
-\begin{itemize}
+\begin{compactitem}
 \item Build a spanning tree using SHOUT
 \item We elect a leader (e.i. minimum using saturation technique)
-\item Jump from the min to the second one and so one. After having elected the minimum, we know the second smallest element and so we send a message with (secondValue, $\infty$ , 2nd), this message travel across the spanning tree to find the third element. After the second recives the message put the value of the subtree as $\infty$ because there is nothing to rank in that subtree and so on. 
-\end{itemize}
+\item Jump from the min to the second one and so on using messages of the form\\ \textit{(first, second, \#rank)}. After having elected the minimum, we know the second smallest element and so we send a message with \textit{(secondValue, $\infty$ , 2nd)}: this message travels across the spanning tree to find the third element. After the second receives the message, set the value of the subtree as $\infty$ because there is nothing to rank in that subtree - and so on. 
+\end{compactitem}
+~ \\ 
 \subsection*{Election problem}
 The election problem cannot be generally solved if the entities do not have different identities.\\
-Consider the system where:
-\begin{itemize}
-\item Unique entities
-\item Same state
-\item Anonymous
-\item Synchronous
-\end{itemize}
-At each moment, they are doing the same thing, Receive the same messages, move to the same state.\\
+Consider a synchronous system where the entities are unique, have the same state and are anonymous.
+At each moment, they are doing the same thing, receive the same messages, move to the same states.\\ In such a system, it is impossible to elect a leader, because the entities are indistinguishable. That is why we need entities with different identities.\\
+Notice that with distinct IDs, minimum finding is an election.
+\\ ~ \\
 \textbf{Election in trees}\\
-To each node x is associated a distinct identifier v(x). A simple algorithm:
-\begin{itemize}
+To each node x is associated a distinct identifier v(x). \\ A simple algorithm:
+\begin{compactitem}
 \item Execute the saturation technique
 \item Choose the saturated node holding the minimum value
-\end{itemize}
-\textbf{Election in rings}
-A ring is a sparse network (few arcs) such as trres but it's not symmetric. \\
-\textbf{Solution:} Each id is fully circulated in the ring, in few entity sees all identities.
+\end{compactitem} ~ \\ 
+\textbf{Election in rings}\\
+A ring is a sparse network (few arcs) such as trees, but it's not symmetric. Every entity has two neighbors.
+\clearpage
+\subsubsection*{All The Way}
+Each ID is fully circulated in the ring, hence each entity sees all identities.
+\\
 Assumptions:
-\begin{itemize}
-\item Two versions: unidirectional and bidirectionals
+\begin{compactitem}
+\item Two versions: unidirectional and bidirectional
 \item Local orientation
 \item Distinct identities
-\end{itemize}
-All the entities can be the initiator. The bidirectional version assumes that it is oriented. The protocol works even without knowing the dimension of the ring and having messages that arrive in a non-FIFO order. Each node sends it value, if it receives a message it forwards it and it keeps track of the minimum value seen so far.\\
-\textbf{Code:} The states are ASLEEP, AWAKE, FOLLOWER, LEADER; the starting state is ASLEEP and the terminal states are FOLLOWER and LEADER. 
+\end{compactitem}
+All the entities can be the initiators. The bidirectional version assumes that the ring is oriented. The protocol works even without knowing the dimension of the ring and having messages that arrive in a non-FIFO order. \\ 
+Ideally: each node sends it value; if it receives a message, it forwards it and it keeps track of the minimum value seen so far.\\ \\
+\textbf{Code}\\The states are ASLEEP, AWAKE, FOLLOWER, LEADER; the starting state is ASLEEP and the terminal states are FOLLOWER and LEADER. 
 \begin{lstlisting}
+(*@\textit{// notice that INITIALIZE and CHECK are "macros" / functions}@*)
 INITIALIZE
 	count = 0
 	size = 1
 	known = false
 	send('Election', id(x), size) to right
 	min = id(x)
-if ASLEEP
-	Spontaneously
-		INITIALIZE
-		become(AWAKE)
-	receiving('Election', value, counter)
-		INITIALIZE
-		send('Election', value, counter+1) to other
-		min = min {min, value}
-		count = count + 1
-		become(AWAKE)
-if AWAKE
-	receiving('Election', value, counter)
-		if value $\neq$ id(x)
-			send('Election', velue, counter+1) to other
-			min = min{min, value}
-			count+=1
-			if known 
-				become(CHECK)
-			else
-				ringsize = counter
-				known = true
-				become(CHECK)
-if CHECK
+
+CHECK
 	if count = ringsize
 		if min = id(x)
 			become(LEADER)
 		else
 			become(FOLLOWER)										
+
+if ASLEEP
+	(*@\textit{spontaneously}@*)
+		INITIALIZE
+		become(AWAKE)
+	(*@\textit{receiving('Election', value, counter)}@*)
+		INITIALIZE
+		send('Election', value, counter+1) to other
+		min = min{min, value}
+		count = count + 1
+		become(AWAKE)
+
+
+
+if AWAKE
+	(*@\textit{receiving('Election', value, counter)}@*)
+		if value $\neq$ id(x)
+			send('Election', value, counter+1) to other
+			min = min{min, value}
+			count+=1
+			if known 
+				CHECK
+		else
+			ringsize = counter
+			known = true
+			CHECK
 \end{lstlisting}
-\textbf{Complexity:} Each entity crosses each link, so the complexity is n$^2$ the size of each message is log(id).\\
-M(Alltheway) = O(n$^2$) messages\\
-T(Alltheway) $\leq$ 2n-1\\
+\textbf{Complexity}\\
+Each entity crosses each link, so the complexity is $\mathcal{O}(n)^2$; the size of each message is $log(id)$.\\
+$M(Alltheway) =\mathcal{O}(n)^2$ messages \\
+$T(Alltheway) \leq 2n-1 = \mathcal{O}(n)$ \\ \\
 Observations:
-\begin{itemize}
+\begin{compactitem}
 \item The algorithm also solves the data collection problem
-\item It also works for unidirectional/bidirectional
-\end{itemize}
-\subsection*{Possible solution: AsFar}
-\textbf{Idea:} It is not necessary to send and recive messages with larger id's than the id's that have already seen.\\
+\item It works for both unidirectional and bidirectional cases
+\end{compactitem}
+\\ ~ \\ 
+\subsubsection*{Another solution: AsFar (as it can)}
+\textbf{Idea} \\ It is not necessary to send and receive messages with larger IDs than the IDs the current node has already seen.\\
 Assumptions:
-\begin{itemize}
+\begin{compactitem}
 \item Unidirectional/bidirectional ring
 \item Different id's
 \item Local oriented
-\end{itemize}
+\end{compactitem}
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{img/asfar.png}
