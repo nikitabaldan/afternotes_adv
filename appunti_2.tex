@@ -773,12 +773,14 @@ Theorem: The finger table of a node x contains at most $\mathcal{O}(\log N)$ dis
 \newpage
 
 \section*{Mobile agents and the black hole problem}
-\textbf{Definition:} Consider that we have some mobile agents that can travel across the graph and could communicate together with a whiteboard and they also have some storage, the problem is to find a malicious node (black hole) that makes disappear our mobile agents. Each agent knows the number of nodes.\\
+\textbf{Definition:} Consider that we have some mobile agents. The mobile agents have a homebase, computing capabilities, local storage and can move from a node to a neighboring one. They can also communicate together with a whiteboard (accessed through mutex). Finally, they have the same behavior (execute the same protocol). In our graph, edge labels are port numbers and are distinct. The problem is to \textit{find a malicious node (black hole) that makes our mobile agents disappear and report its location}. Each agent knows the number of nodes. We are assuming the network is safe.\\
+
 \subsection*{Cautious walk}
-We can consider our graph as a set of ports and in every port there is a traffic light. If the next port has not been controlled, the traffic light is red, going to the next node we activate it (yellow light), and when we come back from that node, that edge (and the next node) is safe (not the black hole). \\
-What about if the configuration of the graph is a ring?\\
+Note: asynchrony makes the problem difficult because we cannot distinguish between a slow agent and one that has disappeared! Also, if n is unknown or the node-connectivity of G is < 2, the problem is unsolvable. \\
+We can consider our graph as a set of ports and in every port there is a traffic light. If the next port has not been controlled, the traffic light is red, going to the next node we activate it (yellow light), and when we come back from that node, that edge (and the next node) is safe (not the black hole), thus the traffic light becomes green. \\
+What about the case in which the graph is a ring?\\
 We need two agents! \\
-The agents, starting from the home base, must explore using cautious walk. The agents must explore disjoint areas otherwise they could both disappear. So they finally explore step by step all the ring until one of the two agents disappear of they finish the graph and the last node that has not been marked is the black hole.
+The agents, starting from the home base, must explore using cautious walk. The agents must explore disjoint areas, otherwise they could both disappear. So they finally explore all the ring step by step until one of the two agents disappears or they finish visiting the graph and the last node that has not been marked is the black hole.
  \begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{img/ring1.png}
@@ -800,8 +802,9 @@ The agents, starting from the home base, must explore using cautious walk. The a
   \caption{Left agent complete the ring and knows where is the black hole (for the whiteboard)}
   \label{fig:boat1}
 \end{figure}
-But what if also the intruder is mobile? \\
+\clearpage
 \subsection*{The intruder capture problem}
+What if the intruder is also mobile?\\
 Let's put some rules, the intruder:
 \begin{itemize}
 \item can moves from a node to a neighbouring one
