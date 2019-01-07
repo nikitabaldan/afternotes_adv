@@ -293,7 +293,8 @@ Saturation: $n$ \\
 Notification: $n-2$ \\
 ~ \\
 Proof (Activation): \\
-$$\sum_{X\in N(S)}N(X) + \sum_{Y\notin N(S)} (N(Y) -1) = \sum_{x\in V} N(X) - (n-i) = 2(n-1) - n + i = n-2+i$$ ~ \\
+Remember that $S$ is the set of initiators and we are in a tree.
+$$\sum_{X\in S}N(X) + \sum_{Y\notin S} (N(Y) -1) = \sum_{x\in V} N(X) - (n-i) = 2(n-1) - n + i = n-2+i$$ ~ \\
 Therefore, when also considering the saturation and the notification phases, we get $$ (n-2+i) + n + (n-2) = 3n + i - 4$$
 
 But how can this technique be useful for our election problem?
