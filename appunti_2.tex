@@ -285,6 +285,17 @@ if PROCESSING
 
 \textbf{Complexity} 
 $$M(Saturation) = 2n -2+n+n-2 = 4(n-1)$$ 
+
+Complexity with \textit{i} initiators: $3n - 4 + i$.
+\\ 
+Activation: $2(n-i)$ \\
+Saturation: $n$ \\
+Notification: $n-2$ \\
+~ \\
+Proof (Activation): \\
+$$\sum_{X\in N(S)}N(X) + \sum_{Y\notin N(S)} (N(Y) -1) = \sum_{x\in V} N(X) - (n-i) = 2(n-1) - n + i = n-2+i$$ ~ \\
+Therefore, when also considering the saturation and the notification phases, we get $$ (n-2+i) + n + (n-2) = 3n + i - 4$$
+
 But how can this technique be useful for our election problem?
 ~ \\
 
@@ -387,11 +398,11 @@ The ranked node attempts to send a ranking message to the next node to be ranked
 \item We elect a leader (e.i. minimum using saturation technique)
 \item Jump from the min to the second one and so on using messages of the form\\ \textit{(first, second, \#rank)}. After having elected the minimum, we know the second smallest element and so we send a message with \textit{(secondValue, $\infty$ , 2nd)}: this message travels across the spanning tree to find the third element. After the second receives the message, set the value of the subtree as $\infty$ because there is nothing to rank in that subtree - and so on. 
 \end{compactitem}
-~ \\ 
+~ 
 \subsection*{Election problem}
 The election problem cannot be generally solved if the entities do not have different identities.\\
 Consider a synchronous system where the entities are unique, have the same state and are anonymous.
-At each moment, they are doing the same thing, receive the same messages, move to the same states.\\ In such a system, it is impossible to elect a leader, because the entities are indistinguishable. That is why we need entities with different identities.\\
+At each moment, they are doing the same thing, receive the same messages, move to the same states. In such a system, it is impossible to elect a leader, because the entities are indistinguishable. That is why we need entities with different identities.\\
 Notice that with distinct IDs, minimum finding is an election.
 \\ ~ \\
 \textbf{Election in trees}\\
@@ -873,7 +884,7 @@ The main idea behind the strategy is to:
 \end{figure}
 We can perform the search of a node or of an edge moving the barrier. (see slides)
 \\
-With a synchronizer: \\
+With a synchronizer	: \\
 Time complexity: $\mathcal{O}(n\cdot m)$ \\
 Moves complexity: $\mathcal{O}(m^2 + n\cdot m)$
 
