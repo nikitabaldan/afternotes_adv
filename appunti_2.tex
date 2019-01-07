@@ -477,19 +477,19 @@ Observations:
 \end{compactitem}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{img/asfar.png}
+  \includegraphics[width=0.7\textwidth]{img/asfar.png}
   \caption{AsFar example}
   \label{fig:boat1}
 \end{figure}
-\textbf{Code:} The states are ASLEEP, AWAKE, FOLLOWER, LEADER; the starting state is ASLEEP, the terminal states are FOLLOWER and LEADER.\\
-\textbf{Unidirectional version:}
+\textbf{Code} \\The states are ASLEEP, AWAKE, FOLLOWER, LEADER; the starting state is ASLEEP, the terminal states are FOLLOWER and LEADER.\\ \\
+\textbf{Unidirectional version}
 \begin{lstlisting}
 if ASLEEP
-	spontaneously
+	(*@\textit{spontaneously}@*)
 		send('Election', id(x)) to right
 		min = id(x)
 		become(AWAKE)
-	receiving('Election', value)
+	(*@\textit{receiving('Election', value)}@*)
 		send('Election', id(x)) to right
 		min = id(x)
 		if value < min
@@ -497,24 +497,49 @@ if ASLEEP
 			min = value
 		become(AWAKE)		
 if AWAKE
-	receiving('Election', value)
+	(*@\textit{receiving('Election', value)}@*)
 		if value < min
 			send('Election', value) to right
 			min = value
 		else
 			if value = min
 				NOTIFY
-	receiving(NOTIFY)
+	(*@\textit{receiving(NOTIFY)}@*)
 		send(NOTIFY) to other
 		become(FOLLOWER)
 NOTIFY
 	send(NOTIFY) to right
 	become(LEADER)						
 \end{lstlisting}
+
+
 \section*{Synchronous systems}
-We consider as synchronous system all systems in which all local clocks are incremented by one unit symultaneously; in other words all local clocks 'tick' in the same moment. Notice that this assumption does not mean that all the clocks have the same value, but just that their values are incremented at the same time.\\ 
-The first part of this section is about calculating how much time will take a message to be send in a synchronous system. (not going to treat this part)
-\subsection*{Man-finding and election}
+We consider as synchronous system all those systems in which all local clocks are incremented by one unit simultaneously; in other words all local clocks 'tick' in the same moment. Notice that this assumption does not mean that all the clocks have the same value, but just that their values are incremented at the same time.\\ 
+The first part of this section is about calculating how much time will it take to send a message in a synchronous system.
+
+\subsection*{2-bit communicators}
+You want to send the number X. Send a bit, wait X seconds, send another bit.
+The receiver just needs to compute the difference between the times in which he receives the two messages: that is number X.
+
+\subsection*{3-bit communicators}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{img/3_bit_communication}
+	\caption[3-bit communicators]{3-bit communicators}
+	\caption{}
+	\label{fig:3bitcommunication}
+\end{figure}
+\textbf{Time complexity} \\
+$\mathcal{O}(n)^2$.
+\\ \\ \textbf{Proof} \\
+We send a number $K$ which is the smallest integer that satisfies the condition: $$ K \in \mathbb{N} : (K-1)^2 < X \land K^2 >= X$$
+This means that $|K^2 - X| < |(K+1)^2 - K^2| = 2K - 1$. \\Therefore we have that the waiting time $C :\, K^2 - C = X$ is bounded, in particular $0 \le C \le 2K$. The time complexity is, therefore, $\mathcal{O}(K + 2K) = \mathcal{O}(K) = \mathcal{O}(\sqrt X)$.
+
+\subsection*{k-bit communicators}
+In general, for a \textit{k}-bit communicator, we have that we use \textit{k} bits to send the message and the time complexity is $\mathcal{O}(k\cdot X^{\frac{1}{k}})$.
+
+
+\subsection*{Min-finding and election}
 \textbf{General idea:} messages travel at different speed.
 \begin{itemize}
 \item Knowledge of n is not necessary
