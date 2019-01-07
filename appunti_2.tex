@@ -540,28 +540,44 @@ In general, for a \textit{k}-bit communicator, we have that we use \textit{k} bi
 
 
 \subsection*{Min-finding and election}
-\textbf{General idea:} messages travel at different speed.
-\begin{itemize}
-\item Knowledge of n is not necessary
-\item Unidirectional version
-\item Synchronous
-\end{itemize}
-There are two ways of eliminating ids, one is like in AsFar, large ids are stopped by smaller ids; the other is that small ids travel faster so to catch up with larger ids and eliminate them. \\
-\textbf{Important:} Each message travels at a speed which depends on the identity it contains.\\ 
-Speed is assumed to be unitary, the same for every message. How can we change it? Introducing appropriate delays.\\
-When a node receives a message containing i, it waits f(i) ticks. When a node receives its own id, it becomes the leader and sends a notification message around the ring. This message will not be delayed.\\
-Another example could be done with f(i) = 2$^i$. When a node recives a message containing i, it waits 2$^i$ ticks. 
+\textbf{Introduction}\\
+Messages travel at different speed. In such a configuration, knowledge of \textit{n} is not necessary. We will focus on the synchronous, unidirectional version.\\
+There are two ways of eliminating IDs: 
+\begin{compactenum}
+	\item similar to AsFar: large IDs are stopped by smaller IDs
+	\item small IDs travel faster, so they catch up with larger IDs and eliminate them
+\end{compactenum}
+~ \\ 
+\textbf{General idea}\\
+It is important to recall that each message travels at a speed which depends on the identity it contains.
+Speed is assumed to be the same for every message (and unitary). We can change it by introducing appropriate delays.\\
+When a node receives a message containing $i$, it waits $f(i)$ ticks. When a node receives its own ID, it becomes the leader and sends a notification message around the ring. This message will not be delayed.
+
+\subsubsection*{Exponential case}
+An example could be done with $f(i) = 2^i$. When a node receives a message containing $i$, it waits $2^i$ ticks. 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{img/fi.png}
   \caption{Graphical example of 2$^i$ delay}
   \label{fig:boat1}
 \end{figure}
-When a node receives its own id, it becomes the leader and sends a notification message around the ring. This message will not be delayed.\\
-In time 2$^i$n + n the smallest id i traverses the ring. Let the second smallest be i+1 (waiting time 2$^{i+1}$). How many links does it have the time to traverse while the smallest id goes around? $$(2^i + n)/ 2^{i+1} \approx n/2$$
-We can generalize that by thinking about the j$^{th}$ id: in time: $2^in + n$, has traversed $(n/2^j)$ links.
-While: $$totalMessages = \sum_{j = 1}^{n-1} = n\sum_{j = 1}^{n-1}1/2^j=O(n)$$ 
-So we can say that the total time is:$$totalComplexity = O(2^in)$$
+
+\textbf{Complexity} \\ 
+In time $2^i\cdot n + n$ the smallest ID $i$ traverses the ring. Let the second smallest be $i+1$ (waiting time $2^{i+1}$). While the smallest ID goes around, the second smallest has the time to traverse $(2^i\cdot n + n)/ 2^{i+1} \approx n/2$ links.\\
+We can generalize that by thinking about the $j^{th}$ ID: in time $2^i\cdot n + n$, it traverses $(n/2^j)$ links.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{img/min_finding_ring}
+	\caption{}
+	\label{fig:minfindingring}
+\end{figure}
+
+Considering all of the above, we get $$totalMessages = \sum_{j = 1}^{n-1} \frac{n}{2^j}= n\sum_{j = 1}^{n-1}1/2^j = \mathcal{O}(n)$$ 
+
+Setting $i$ as the smallest ID and $Id$ as the biggest ID we obtain a time complexity of $\mathcal{O}(2^in)$ and a total message complexity (in bits) of $\mathcal{O}(n\cdot \log(Id))$.
+
+
 
 \section*{Peer-to-peer}
 \subsection*{Architecture}
