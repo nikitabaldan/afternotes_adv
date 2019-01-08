@@ -5,7 +5,6 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{graphicx}
-\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 \usepackage{amsmath,amsfonts}
 \usepackage{sectsty} % Allows customizing section commands
 \allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
@@ -136,7 +135,7 @@ It is also worth noting that in a distributed environment the entities end their
 \section*{Protocol SHOUT}
 We are assuming that there is a single initiator, there are bidirectional links, there is total reliability and G is connected. \\ \\
 \textbf{Preliminary: definition of Spanning Tree} \\ 
-A spanning tree T of a graph G = (V, E) is an acyclic subgraph of G such that T' = (V, E') and\\ E' $\subseteq$ E.
+A spanning tree T of a graph G = (V, E) is an acyclic subgraph of G such that T = (V, E') and\\ E' $\subseteq$ E.
 \\ ~ \\
 \textbf{Definition} \\
 We want to build a spanning tree in a distributed system, but we have to consider that the entities do not know G, not even its size. The only things an entity is aware of are the labels on the ports leading to its neighbors and the fact that, if it sends a message to a neighbor, the message will eventually be received.\\~\\
@@ -324,7 +323,7 @@ if AVAILABLE
 		send('Activate') to N(x)
 		min = v(x)
 		neighbors = N(x)
-		if |neigbours| = 1 //leaf
+		if |neighbors| = 1 //leaf
 			M = ('Saturation', min)
 			parent = neighbors
 			send(M) to parent
@@ -396,7 +395,7 @@ The ranked node attempts to send a ranking message to the next node to be ranked
 \textbf{Code}
 \begin{compactitem}
 \item Build a spanning tree using SHOUT
-\item We elect a leader (e.i. minimum using saturation technique)
+\item We elect a leader (i.e. minimum using saturation technique)
 \item Jump from the min to the second one and so on using messages of the form\\ \textit{(first, second, \#rank)}. After having elected the minimum, we know the second smallest element and so we send a message with \textit{(secondValue, $\infty$ , 2nd)}: this message travels across the spanning tree to find the third element. After the second receives the message, set the value of the subtree as $\infty$ because there is nothing to rank in that subtree - and so on. 
 \end{compactitem}
 ~ 
@@ -484,7 +483,7 @@ Observations:
 ~ \\ \textbf{Assumptions}
 \begin{compactitem}
 \item Unidirectional/bidirectional ring
-\item Different id's
+\item Different IDs
 \item Local oriented
 \end{compactitem}
 \begin{figure}[H]
@@ -542,7 +541,7 @@ The receiver just needs to compute the difference between the times in which he 
 	\label{fig:3bitcommunication}
 \end{figure}
 \textbf{Time complexity} \\
-$\mathcal{O}(n)^2$.
+$\mathcal{O}(\sqrt X)$.
 \\ \\ \textbf{Proof} \\
 We send a number $K$ which is the smallest integer that satisfies the condition: $$ K \in \mathbb{N} : (K-1)^2 < X \land K^2 >= X$$
 This means that $|K^2 - X| < |(K+1)^2 - K^2| = 2K - 1$. \\Therefore we have that the waiting time $C :\, K^2 - C = X$ is bounded, in particular $0 \le C \le 2K$. The time complexity is, therefore, $\mathcal{O}(K + 2K) = \mathcal{O}(K) = \mathcal{O}(\sqrt X)$.
