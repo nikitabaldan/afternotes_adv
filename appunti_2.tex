@@ -470,7 +470,7 @@ if AWAKE
 \end{lstlisting}
 \textbf{Complexity}\\
 Each entity crosses each link, so the complexity is $\mathcal{O}(n)^2$; the size of each message is $log(id)$.\\
-$M(Alltheway) =\mathcal{O}(n)^2$ messages \\
+$M(Alltheway) =\mathcal{O}(n^2)$ messages \\
 $T(Alltheway) \leq 2n-1 = \mathcal{O}(n)$ \\ \\
 Observations:
 \begin{compactitem}
@@ -652,9 +652,8 @@ Combines characteristics of pure and a hybrid P2P systems.
 \item The super peers execute the queries for the leaves (i.e. they work as servers)
 \item The super peers also operate as normal peers
 \item The peers exchange information directly
-\item Combine the characteristics of hybrid and pure systems
 \end{compactitem}
-\textbf{Search} \\
+~ \\  \textbf{Search} \\
 We need to consider the following questions:
 \begin{compactitem}
 \item Good numbers  of leaves for each super peer?
@@ -742,7 +741,7 @@ The best solution consists in storing \textit{m} values in each node. The search
 Each node maintains a \textit{finger table} (the i-th entry of the finger table of x is the first node that succeeds or equals $(x + 2^i) mod 2^m)$ and the predecessor node. An item identified by ID is stored on the successor node of ID.
 \clearpage
 \subsubsection*{Examples}
-Here below it will be provided some examples of how this algorithm works. 
+Here are some examples of how this algorithm works
  \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{img/chord1.png}
