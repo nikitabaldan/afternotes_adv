@@ -547,7 +547,7 @@ We send a number $K$ which is the smallest integer that satisfies the condition:
 This means that $|K^2 - X| < |(K+1)^2 - K^2| = 2K - 1$. \\Therefore we have that the waiting time $C :\, K^2 - C = X$ is bounded, in particular $0 \le C \le 2K$. The time complexity is, therefore, $\mathcal{O}(K + 2K) = \mathcal{O}(K) = \mathcal{O}(\sqrt X)$.
 
 \subsection*{k-bit communicators}
-In general, for a \textit{k}-bit communicator, we have that we use \textit{k} bits to send the message and the time complexity is $\mathcal{O}(k\cdot X^{\frac{1}{k}})$.
+In general, for a \textit{k}-bit communicator, we have that we use \textit{k} bits to send the message and the time complexity is $\mathcal{O}(k\cdot X^{\frac{1}{k}})$. (the teacher says so, actually it is $\mathcal{O}(k\cdot X^{\frac{1}{k-1}})$)
 
 
 \subsection*{Min-finding and election}

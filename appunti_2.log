@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  11 JAN 2019 14:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  11 JAN 2019 14:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1087,7 +1087,7 @@ File: img/fi.png Graphic file (type png)
 Package pdftex.def Info: img/fi.png  used on input line 571.
 (pdftex.def)             Requested size: 167.29967pt x 78.86885pt.
 [16 <./img/fi.png>]
-<img/min_finding_ring.png, id=73, 728.7225pt x 367.3725pt>
+<img/min_finding_ring.png, id=74, 728.7225pt x 367.3725pt>
 File: img/min_finding_ring.png Graphic file (type png)
 <use img/min_finding_ring.png>
 Package pdftex.def Info: img/min_finding_ring.png  used on input line 582.
@@ -1109,7 +1109,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input li
 ne 594.
 
-<img/p2p.png, id=74, 976.64874pt x 624.3325pt>
+<img/p2p.png, id=75, 976.64874pt x 624.3325pt>
 File: img/p2p.png Graphic file (type png)
 <use img/p2p.png>
 Package pdftex.def Info: img/p2p.png  used on input line 597.
@@ -1131,7 +1131,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input li
 ne 603.
 
-<img/search_n.png, id=80, 503.8825pt x 256.96pt>
+<img/search_n.png, id=81, 503.8825pt x 256.96pt>
 File: img/search_n.png Graphic file (type png)
 <use img/search_n.png>
 Package pdftex.def Info: img/search_n.png  used on input line 608.
@@ -1144,13 +1144,13 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input li
 ne 614.
 
-<img/gnu1.png, id=81, 512.91624pt x 312.16624pt>
+<img/gnu1.png, id=82, 512.91624pt x 312.16624pt>
 File: img/gnu1.png Graphic file (type png)
 <use img/gnu1.png>
 Package pdftex.def Info: img/gnu1.png  used on input line 621.
 (pdftex.def)             Requested size: 230.04182pt x 140.0067pt.
 [18 <./img/p2p.png> <./img/search_n.png>]
-<img/gnu2.png, id=87, 505.89pt x 325.215pt>
+<img/gnu2.png, id=88, 505.89pt x 325.215pt>
 File: img/gnu2.png Graphic file (type png)
 <use img/gnu2.png>
 Package pdftex.def Info: img/gnu2.png  used on input line 627.
@@ -1211,7 +1211,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 693--697
 
  []
 
-<img/chord_ex.png, id=97, 744.7825pt x 432.61626pt>
+<img/chord_ex.png, id=98, 744.7825pt x 432.61626pt>
 File: img/chord_ex.png Graphic file (type png)
 <use img/chord_ex.png>
 Package pdftex.def Info: img/chord_ex.png  used on input line 726.
@@ -1235,22 +1235,22 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input li
 ne 743.
 
-<img/chord1.png, id=105, 736.7525pt x 413.545pt>
+<img/chord1.png, id=106, 736.7525pt x 413.545pt>
 File: img/chord1.png Graphic file (type png)
 <use img/chord1.png>
 Package pdftex.def Info: img/chord1.png  used on input line 747.
 (pdftex.def)             Requested size: 418.25555pt x 234.77025pt.
-<img/chord2.png, id=106, 692.5875pt x 360.34625pt>
+<img/chord2.png, id=107, 692.5875pt x 360.34625pt>
 File: img/chord2.png Graphic file (type png)
 <use img/chord2.png>
 Package pdftex.def Info: img/chord2.png  used on input line 752.
 (pdftex.def)             Requested size: 418.25555pt x 217.617pt.
-<img/chord3.png, id=107, 715.67375pt x 463.7325pt>
+<img/chord3.png, id=108, 715.67375pt x 463.7325pt>
 File: img/chord3.png Graphic file (type png)
 <use img/chord3.png>
 Package pdftex.def Info: img/chord3.png  used on input line 757.
 (pdftex.def)             Requested size: 418.25555pt x 271.01706pt.
-<img/chord4.png, id=108, 754.82pt x 460.72125pt>
+<img/chord4.png, id=109, 754.82pt x 460.72125pt>
 File: img/chord4.png Graphic file (type png)
 <use img/chord4.png>
 Package pdftex.def Info: img/chord4.png  used on input line 763.
@@ -1258,7 +1258,7 @@ Package pdftex.def Info: img/chord4.png  used on input line 763.
 [23
 
  <./img/chord1.png> <./img/chord2.png>]
-<img/chord_query.png, id=114, 761.84625pt x 474.77374pt>
+<img/chord_query.png, id=115, 761.84625pt x 474.77374pt>
 File: img/chord_query.png Graphic file (type png)
 <use img/chord_query.png>
 Package pdftex.def Info: img/chord_query.png  used on input line 769.
@@ -1285,23 +1285,23 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input li
 ne 788.
 
-<img/ring1.png, id=125, 684.5575pt x 400.49625pt>
+<img/ring1.png, id=126, 684.5575pt x 400.49625pt>
 File: img/ring1.png Graphic file (type png)
 <use img/ring1.png>
 Package pdftex.def Info: img/ring1.png  used on input line 796.
 (pdftex.def)             Requested size: 209.12778pt x 122.34978pt.
-<img/ring2.png, id=126, 694.595pt x 398.48875pt>
+<img/ring2.png, id=127, 694.595pt x 398.48875pt>
 File: img/ring2.png Graphic file (type png)
 <use img/ring2.png>
 Package pdftex.def Info: img/ring2.png  used on input line 801.
 (pdftex.def)             Requested size: 209.12778pt x 119.97318pt.
-<img/ring3.png, id=127, 712.6625pt x 457.71pt>
+<img/ring3.png, id=128, 712.6625pt x 457.71pt>
 File: img/ring3.png Graphic file (type png)
 <use img/ring3.png>
 Package pdftex.def Info: img/ring3.png  used on input line 806.
 (pdftex.def)             Requested size: 209.12778pt x 134.3109pt.
 [26 <./img/ring1.png>]
-<img/ring4.png, id=132, 708.6475pt x 408.52625pt>
+<img/ring4.png, id=133, 708.6475pt x 408.52625pt>
 File: img/ring4.png Graphic file (type png)
 <use img/ring4.png>
 Package pdftex.def Info: img/ring4.png  used on input line 811.
@@ -1315,7 +1315,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input li
 ne 816.
 
-<img/cont.png, id=139, 554.07pt x 349.305pt>
+<img/cont.png, id=140, 554.07pt x 349.305pt>
 File: img/cont.png Graphic file (type png)
 <use img/cont.png>
 Package pdftex.def Info: img/cont.png  used on input line 833.
@@ -1336,7 +1336,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input li
 ne 841.
 
-<img/cont_2.png, id=144, 716.6775pt x 419.5675pt>
+<img/cont_2.png, id=145, 716.6775pt x 419.5675pt>
 File: img/cont_2.png Graphic file (type png)
 <use img/cont_2.png>
 Package pdftex.def Info: img/cont_2.png  used on input line 845.
@@ -1355,7 +1355,7 @@ Overfull \hbox (5.61801pt too wide) in paragraph at lines 875--876
 in-ing a ver-ti-cal bar-rier of agents
  []
 
-<img/cont_front.png, id=145, 686.565pt x 368.37625pt>
+<img/cont_front.png, id=146, 686.565pt x 368.37625pt>
 File: img/cont_front.png Graphic file (type png)
 <use img/cont_front.png>
 Package pdftex.def Info: img/cont_front.png  used on input line 880.
@@ -1378,16 +1378,17 @@ t/fonts/enc/dvips/mnsymbol/MnSymbolF.enc}{/usr/share/texlive/texmf-dist/fonts/e
 nc/dvips/mnsymbol/MnSymbolS.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/
 mnsymbol/MnSymbolE.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.e
 nc}</usr/share/texlive/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol8.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/fourier/fourier-bb.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/fourier/fourier-ml.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/a
-dobe/utopia/putri8a.pfb>
-Output written on appunti_2.pdf (30 pages, 1918753 bytes).
+usr/share/texlive/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol6.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol8.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/fourier/fourier-bb.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/fourier/fourier-ml.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/u
+topia/putri8a.pfb>
+Output written on appunti_2.pdf (30 pages, 1929141 bytes).
 PDF statistics:
- 190 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
+ 194 PDF objects out of 1000 (max. 8388607)
+ 108 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
