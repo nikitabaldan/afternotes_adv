@@ -287,7 +287,7 @@ $$M(Saturation) = 2n -2+n+n-2 = 4(n-1)$$
 
 Complexity with \textit{i} initiators: $3n - 4 + i$.
 \\ 
-Activation: $2(n-i)$ \\
+Activation: $n-2+i$ \\
 Saturation: $n$ \\
 Notification: $n-2$ \\
 ~ \\
@@ -412,7 +412,7 @@ To each node x is associated a distinct identifier v(x). \\ A simple algorithm:
 \item Choose the saturated node holding the minimum value
 \end{compactitem} ~ \\ 
 \textbf{Election in rings}\\
-A ring is a sparse network (few arcs) such as trees, but it's not symmetric. Every entity has two neighbors.
+A ring is a sparse network (few arcs) such as trees, but it's symmetric: each entity has two neighbors.
 \clearpage
 \subsubsection*{All The Way}
 Each ID is fully circulated in the ring, hence each entity sees all identities.
@@ -646,7 +646,7 @@ Many variations: blind, informed...
 \end{compactenum}
 
 \subsubsection*{Super peer (KaZaA)}
-Combines characteristics of pure and a hybrid P2P systems.
+Combines characteristics of pure and hybrid P2P systems.
 \begin{compactitem}
 \item There are different servers; the super peers supervise the subnetworks (subtrees)
 \item The super peers execute the queries for the leaves (i.e. they work as servers)
